@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="card" *ngFor="let job of jobs">
+        <p-card [header]="job.jobName" [subheader]="'Publised: ' + job.publishDate" [style]="{width: '360px'}"
+            styleClass="p-card-shadow">
+            <ng-template pTemplate="header">
+                <img alt="Card" class="job-logo" src="../../../assets/aiub.png">
+            </ng-template>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae
+                numquam deserunt
+                quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate
+                neque quas!</p>
+            <ng-template pTemplate="footer">
+                <button pButton pRipple type="button" label="View" class="p-button-outlined p-button-rounded"></button>
+                <button pButton pRipple type="button" label="Apply" class="p-button-outlined p-button-rounded p-button-help" [style]="{'margin-left': '.5em'}"></button>
+
+            </ng-template>
+        </p-card>
+    </div>
+</div>

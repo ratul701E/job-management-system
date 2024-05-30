@@ -1,0 +1,40 @@
+body {
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+}
+
+.container {
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 40px; 
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    width: 500px;
+    max-width: 80%;
+}
+
+.p-button-rounded {
+    margin: 10px;
+}
+
+.title {
+    font-size:4vh;
+    color: #364347;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    font-family: 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.logo {
+    display: block;
+    width: 128px;
+    height: 128px;
+    margin: 0 auto; 
+}
+
