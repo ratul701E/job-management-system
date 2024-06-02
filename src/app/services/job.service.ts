@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable, map } from 'rxjs';
-import { Job } from '../components/job-item/interface/job';
+import { Job } from '../components/job-item/interface/Job';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -9,10 +9,15 @@ const httpOptions = {
   })
 }
 
-export interface ApiResponse {
+export interface ApiResponseJobs {
   isError: boolean;
   messages: string[];
   data: Job[];
+}
+export interface ApiResponseJob {
+  isError: boolean;
+  messages: string[];
+  data: Job;
 }
 
 @Injectable({
@@ -25,8 +30,16 @@ export class JobService {
   }
 
   getAllJobs(): Observable<Job[]> {
-    return this.http.get<ApiResponse>(this.url, httpOptions).pipe(
+    return this.http.get<ApiResponseJobs>(this.url, httpOptions).pipe(
       map(response => response.data)
+    );
+  }
+
+  getAllApplicationByID(jobId: number): Observable<Job> {
+    return this.http.get<ApiResponseJob>(`${this.url}/${jobId}`, httpOptions).pipe(
+      map(response => {
+        return response.data
+      })
     );
   }
 }

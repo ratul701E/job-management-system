@@ -1,1 +1,29 @@
-<p>job-item works!</p>
+
+<div class="job-detail-container" *ngIf="dataAvailable">
+    <p-card [header]="job.jobName" [subheader]="'Published: ' + job.publishDate" styleClass="p-card-shadow">
+        <ng-template pTemplate="header">
+            <img alt="Job Image" class="job-logo" src="../../../assets/aiub.png">
+        </ng-template>
+        <div class="content">
+            <p>
+                <b>Job Location: </b> {{job.location}} <br>
+                <b>Salary: </b> {{job.salary}} <br>
+                <b>Description: </b> {{job.description}} <br>
+                <b>Requirements: </b> <br>
+                <ul>
+                    <li *ngFor="let req of job.requirements">{{req}}</li>
+                </ul>
+                <b>Responsibilities: </b> <br>
+                <ul>
+                    <li *ngFor="let res of job.responsibilities">{{res}}</li>
+                </ul>
+                <b>Remaining Application Slots: </b> {{job.maximumApplication}} <br>
+
+        </div>
+        <ng-template pTemplate="footer">
+            <button pButton pRipple type="button" label="Back" class="p-button-outlined p-button-rounded" (click)="goBack()"></button>
+        </ng-template>
+    </p-card>
+</div>
+
+{{dataAvailable}}

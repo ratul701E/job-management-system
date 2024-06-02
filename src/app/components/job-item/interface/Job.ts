@@ -1,5 +1,5 @@
 export interface Job {
-    jobId?: number;
+    jobId: number;
     jobName: string;
     location: string;
     salary: number;

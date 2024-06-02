@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JobService } from 'src/app/services/job.service';
-import { Job } from '../job-item/interface/job';
+import { Job } from '../job-item/interface/Job';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-job',
@@ -10,10 +11,16 @@ import { Job } from '../job-item/interface/job';
 export class JobComponent implements OnInit {
 
   jobs: Job[] = [];
-  constructor(private jobService: JobService) { }
+  constructor(private jobService: JobService, private router: Router) { }
 
   ngOnInit(): void {
     this.jobService.getAllJobs().subscribe(jobs => this.jobs = jobs)
+  }
+
+  
+
+  goToJob(jobId: number) {
+    this.router.navigate([`/job`], {state: {'jobId' : jobId}});
   }
 
 }

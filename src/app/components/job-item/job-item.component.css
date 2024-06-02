@@ -1,0 +1,30 @@
+.job-detail-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.p-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid grey;
+}
+
+.job-logo {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.content {
+    padding: 16px;
+}
+
+button {
+    margin-top: 20px;
+}

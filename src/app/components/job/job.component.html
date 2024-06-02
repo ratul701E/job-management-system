@@ -9,14 +9,19 @@
                 <b>Job Location: </b> {{job.location}} <br>
                 <b>Salary: </b> {{job.salary}} <br>
                 <b>Description: </b> {{job.description}} <br>
-                <b>Responsibilities: </b> {{job.responsibilities}} <br>
-                <b>requirements: </b> {{job.requirements}} <br>
-
-
-            </p>
+                <b>Requirements: </b> <br>
+            <ul>
+                <li *ngFor="let req of job.requirements">{{req}}</li>
+            </ul>
+            <b>Responsibilities: </b> <br>
+            <ul>
+                <li *ngFor="let res of job.responsibilities">{{res}}</li>
+            </ul>
+            <b>Remaining Application Slots: </b> {{job.maximumApplication}} <br>
             <ng-template pTemplate="footer">
-                <button pButton pRipple type="button" label="View" class="p-button-outlined p-button-rounded"></button>
-                <button pButton pRipple type="button" label="Apply" class="p-button-outlined p-button-rounded p-button-help" [style]="{'margin-left': '.5em'}"></button>
+                <button pButton pRipple type="button" label="View" class="p-button-outlined p-button-rounded" (click)="goToJob(job.jobId)"></button>
+                <button pButton pRipple type="button" label="Apply"
+                    class="p-button-outlined p-button-rounded p-button-help" [style]="{'margin-left': '.5em'}"></button>
 
             </ng-template>
         </p-card>
