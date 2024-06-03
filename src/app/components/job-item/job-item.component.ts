@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { JobService } from 'src/app/services/job.service';
 import { Job } from './interface/Job';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-job-item',
@@ -11,8 +11,9 @@ import { Router } from '@angular/router';
 export class JobItemComponent implements OnInit {
 
   @Input() jobId: number = 0
-  dataAvailable : boolean = false
-   job: Job = {
+  @Input() isButtonVisible: boolean = true;
+
+  job: Job = {
     jobId: 1,
     jobName: "null",
     location: "null",
@@ -22,21 +23,28 @@ export class JobItemComponent implements OnInit {
     requirements: ["null"],
     responsibilities: ["null"],
     maximumApplication: 50
-};
+  };
 
-  constructor(private jobService: JobService, private router: Router) { }
+  constructor(private jobService: JobService, private AcRouter: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.router.getCurrentNavigation()?.extras)
+
+    this.AcRouter.queryParams.subscribe((params: any) => this.jobId = params.jobId)
+
+
     this.jobService.getAllApplicationByID(this.jobId).subscribe(job => {
-      this.dataAvailable = true;
       this.job = job
+      console.log(this.job)
     })
-    
+
   }
 
   goBack(): void {
-    this.router.navigate(['/jobs']);
+    this.router.navigate(['/jobs'])
+  }
+
+  apply(jobId: number) {
+    this.router.navigate(["/apply"], {queryParams: {'jobId' : jobId}})
   }
 
 }

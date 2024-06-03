@@ -14,13 +14,21 @@ export class JobComponent implements OnInit {
   constructor(private jobService: JobService, private router: Router) { }
 
   ngOnInit(): void {
-    this.jobService.getAllJobs().subscribe(jobs => this.jobs = jobs)
+    this.jobService.getAllJobs().subscribe(jobs => {
+      this.jobs = jobs
+    })
+
   }
 
   
 
   goToJob(jobId: number) {
-    this.router.navigate([`/job`], {state: {'jobId' : jobId}});
+    console.log(jobId)
+    this.router.navigate([`/job`], {queryParams: {'jobId' : jobId}});
+  }
+
+  apply(jobId: number){
+    this.router.navigate(["/apply"], {queryParams: {'jobId' : jobId}})
   }
 
 }
