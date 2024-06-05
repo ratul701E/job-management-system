@@ -1,136 +1,166 @@
-<div class="job-information">
-    <p-button (click)="showJobDetails()" icon="pi pi-external-link" label="Show Job Information"></p-button>
-    <br> <br>
-    <button class="back-btn" icon="pi pi-arrow-left" pButton pRipple type="button" label="View All Jobs" class="p-button-secondary"></button>
-    <p-dialog header="Job Information" [(visible)]="showJob" [style]="{width: '50vw'}">
-        
-        <app-job-item [jobId]="this.jobId" [isButtonVisible]="false"></app-job-item>
-        
-        <ng-template pTemplate="footer">
-            <p-button icon="pi pi-times" (click)="showJob=false" label="Close" styleClass="p-button-text"></p-button>
-        </ng-template>
-    </p-dialog>
-</div>
+<div class="container">
+    <div class="navbar">
+        <app-apply-nav (back)="goBack()" (showJobInfo)="showJobDetails()"></app-apply-nav>
+    </div>
 
-
-
-<div class="form-container">
-    <form class="form">
-
-        <div class="form-group">
-            <label for="dob">Name</label>
-            <input type="text" class="p-inputtext-sm" pInputText />
+    <div>
+        <div class="job-information">
+            <p-dialog header="Job Information" [(visible)]="showJob" [style]="{width: '50vw'}">
+                <app-job-item [jobId]="this.jobId" [isButtonVisible]="false"></app-job-item>
+                <ng-template pTemplate="footer">
+                    <p-button icon="pi pi-times" (click)="showJob=false" label="Close"
+                        styleClass="p-button-text"></p-button>
+                </ng-template>
+            </p-dialog>
         </div>
 
+        <div class="title">Application Form</div>
 
-        <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="tel" class="p-inputtext-sm" pInputText>
-        </div>
-
-
-        <div class="form-group">
-            <label for="dateformat">Date of Birth</label>
-            <!-- <p-calendar class="date-input" [(ngModel)]="dob"  dateFormat="mm-dd-yy" inputId="dateformat" name="dateOfBirth" ></p-calendar> -->
-            <p-calendar class="date-input" [(ngModel)]="dob" dateFormat="dd-mm-yy" [showIcon]="true" inputId="icon"
-                name="dateOfBirth"></p-calendar>
-        </div>
-
-
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="p-inputtext-sm" pInputText>
-        </div>
-
-
-        <div class="form-group">
-            <label for="isAiubian">Are you an AIUBian?</label>
-            <input type="checkbox" id="isAiubian" (change)="toggleIsAiubian()" name="isAiubian">
-            <div *ngIf="isAiubian">
-                <label for="id">ID</label>
-                <input type="text" class="p-inputtext-sm" pInputText>
-            </div>
-        </div>
-
-        <div class="form-section">
-            <label class="label-group" for="">BSc Information</label>
+        <div class="form-container">
             <div class="form-group">
-                <label for="bsc-uni">University</label>
-                <input id="disabled-input" type="text" [value]="university" pInputText [disabled]="isAiubian"
-                    [(ngModel)]="university" />
-            </div>
-            <div class="form-group">
-                <label for="bsc-department">Department</label>
-                <input type="text" class="p-inputtext-sm" pInputText>
-            </div>
-            <div class="form-group">
-                <label for="bsc-cgpa">CGPA</label>
-                <input type="number" class="p-inputtext-sm" pInputText step="0.01" min="0" max="4">
+                <label for="name">Name</label>
+                <input type="text" class="p-inputtext-sm" pInputText id="name" [(ngModel)]="application.name"
+                    name="name" required />
             </div>
 
             <div class="form-group">
-                <label for="isAiubian">Is BSc Completed?</label>
-                <input type="checkbox" id="isAiubian" (change)="toggleIsBscCompleted()" name="isBscCompleted">
+                <label for="phone">Phone</label>
+                <input type="tel" class="p-inputtext-sm" pInputText id="phone" [(ngModel)]="application.phone"
+                    name="phone" required />
+            </div>
 
-                <div *ngIf="isBscCompleted">
-                    <label for="id">Gradutation Year</label>
-                    <input type="text" class="p-inputtext-sm" pInputText>
-                </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <p-calendar class="date-input" [(ngModel)]="application.dob" dateFormat="yy-mm-dd"
+                    [showIcon]="true"></p-calendar>
+            </div>
 
-                <div *ngIf="!isBscCompleted">
-                    <label for="id">Admission Year</label>
-                    <input type="text" class="p-inputtext-sm" pInputText>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="p-inputtext-sm" pInputText id="email" [(ngModel)]="application.email"
+                    name="email" required />
+            </div>
+
+            <div class="form-group">
+                <label for="isAiubian">Are you an AIUBian?</label>
+                <input type="checkbox" id="isAiubian" (change)="toggleIsAiubian()" name="isAiubian" />
+                <div *ngIf="application.isAiubian">
+                    <br>
+                    <label for="aiubId">AIUB Student ID</label>
+                    <input type="text" class="p-inputtext-sm" [(ngModel)]="application.aiubId" pInputText id="aiubId"
+                        name="aiubId" />
                 </div>
             </div>
-        </div>
 
-
-        <div class="form-section">
-            <label class="label-group" for="">MSc Information</label>
-            <input type="checkbox" id="isAiubian" (change)="toggleMsc()" name="isAiubian">
-            <div *ngIf="isMSC">
+            <div class="form-section">
+                <h3>BSc Information</h3>
                 <div class="form-group">
-                    <label for="bsc-uni">University</label>
-                    <input id="disabled-input" type="text" [value]="university" pInputText [disabled]="isAiubian"
-                        [(ngModel)]="university" />
+                    <label for="bsc-university">University</label>
+                    <input id="bsc-university" type="text" pInputText [value]="application.bscUniversity"
+                        [(ngModel)]="application.bscUniversity" [disabled]="application.isAiubian"
+                        name="bscUniversity" />
                 </div>
                 <div class="form-group">
-                    <label for="msc-department">Department</label>
-                    <input type="text" id="msc-department" name="msc-department">
+                    <label for="bsc-department">Department</label>
+                    <input type="text" class="p-inputtext-sm" [(ngModel)]="application.bscDepartment" pInputText
+                        id="bsc-department" name="bscDepartment" />
                 </div>
                 <div class="form-group">
-                    <label for="msc-cgpa">CGPA</label>
-                    <input type="number" id="msc-cgpa" name="msc-cgpa" step="0.01" min="0" max="4">
+                    <label for="bsc-cgpa">CGPA</label>
+                    <input type="number" class="p-inputtext-sm" [(ngModel)]="application.bscCGPA" pInputText
+                        id="bsc-cgpa" step="0.01" min="0" max="4" name="bscCGPA" />
                 </div>
-
                 <div class="form-group">
-                    <label for="isAiubian">Is MSC Completed?</label>
-                    <input type="checkbox" (change)="toggleIsMscCompleted()" name="isMscCompleted">
-
-                    <div *ngIf="isMscCompleted">
-                        <label for="id">Gradutation Year</label>
-                        <input type="text" class="p-inputtext-sm" pInputText>
+                    <label for="isBscCompleted">Is BSc Completed?</label>
+                    <input type="checkbox" id="isBscCompleted" (change)="toggleIsBscCompleted()"
+                        name="isBscCompleted" />
+                    <div *ngIf="application.isBscCompleted">
+                        <br>
+                        <label for="bscGraduationYear">Graduation Year</label>
+                        <input type="number" name="bscGraduationYear" [(ngModel)]="application.bscGraduationYear">
                     </div>
-
-                    <div *ngIf="!isMscCompleted">
-                        <label for="id">Admission Year</label>
-                        <input type="text" class="p-inputtext-sm" pInputText>
+                    <div *ngIf="!application.isBscCompleted">
+                        <br>
+                        <label for="bscAdmissionYear">Admission Year</label>
+                        <input type="number" name="bscAdmissionYear" [(ngModel)]="application.bscAdmissionYear">
                     </div>
                 </div>
-
             </div>
-        </div>
 
-
-        <div class="form-section">
-            <div class="form-group">
-                <label for="cv">Upload CV</label>
-                <p-fileUpload #fubauto mode="basic" name="demo[]" url="" accept=".pdf" [maxFileSize]="1000000"
-                    (onUpload)="onUpload($event)" [auto]="true" chooseLabel="Browse"></p-fileUpload>
+            <div class="form-section">
+                <h3>MSc Information</h3>
+                <input type="checkbox" id="isMscCompleted" (change)="toggleMsc()" name="isMsc" />
+                <div *ngIf="isMSC">
+                    <br>
+                    <div class="form-group">
+                        <label for="msc-university">University</label>
+                        <input id="msc-university" type="text" pInputText [(ngModel)]="application.mscUniversity"
+                            name="mscUniversity" />
+                    </div>
+                    <div class="form-group">
+                        <label for="msc-department">Department</label>
+                        <input type="text" class="p-inputtext-sm" [(ngModel)]="application.mscDepartment" pInputText
+                            id="msc-department" name="mscDepartment" />
+                    </div>
+                    <div class="form-group">
+                        <label for="msc-cgpa">CGPA</label>
+                        <input type="number" class="p-inputtext-sm" [(ngModel)]="application.mscCGPA" pInputText
+                            id="msc-cgpa" step="0.01" min="0" max="4" name="mscCGPA" />
+                    </div>
+                    <div class="form-group">
+                        <label for="isMscCompleted">Is MSc Completed?</label>
+                        <input type="checkbox" id="isMscCompleted" (change)="toggleIsMscCompleted()"
+                            name="isMscCompleted" />
+                        <div *ngIf="application.isMscCompleted">
+                            <br>
+                            <label for="mscGraduationYear">Graduation Year</label>
+                            <input type="number" name="mscGraduationYear" [(ngModel)]="application.mscGraduationYear">
+                        </div>
+                        <div *ngIf="!application.isMscCompleted">
+                            <br>
+                            <label for="mscAdmissionYear">Admission Year</label>
+                            <input type="number" name="mscAdmissionYear" [(ngModel)]="application.mscAdmissionYear">
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <button pButton pRipple type="button" label="Apply" class="p-button-outlined p-button-rounded p-button-help"
-            [style]="{'margin-left': '.5em'}"></button>
-    </form>
+            <div class="form-section">
+                <label for="-">Skills</label>
+                <br>
+                <br>
+                <span class="single-skill" *ngFor="let skill of application.skills">
+                    <p-chip label={{skill}} [removable]="true"></p-chip>
+                </span>
+                <br>
+                <br>
+                <div class="skills">
+                    <input type="text" class="p-inputtext-sm" pInputText id="skill" [(ngModel)]="skill" name="skill"
+                        required />
+                    <p-button class="add-skill-button" (click)="addSkill()" icon="pi pi-plus"></p-button>
+
+                </div>
+            </div>
+
+            <div class="form-section upload">
+                <div class="form-group">
+                    <label for="cv">Upload CV</label>
+                    <p-fileUpload #fubauto mode="basic" name="demo[]" url="" accept=".pdf" [maxFileSize]="10000000"
+                        (onUpload)="onUpload($event)" [auto]="true" chooseLabel="Browse"
+                        [style]="{'margin-top' : '10px'}"></p-fileUpload>
+                </div>
+                <div class="form-group">
+                    <label for="cv">Upload Cover Letter</label>
+                    <p-fileUpload #fubauto mode="basic" name="demo[]" url="" accept=".pdf" [maxFileSize]="10000000"
+                        (onUpload)="onUpload($event)" [auto]="true" chooseLabel="Browse"
+                        [style]="{'margin-top' : '10px'}"></p-fileUpload>
+                </div>
+            </div>
+
+            <button pButton pRipple type="button" label="Apply" class="p-button-outlined p-button-rounded p-button-help"
+                [style]="{'margin-left': '.5em', 'width' : '100%'}" (click)="handleApply()"></button>
+        </div>
+    </div>
+
+    <p-toast position="top-center" key="tc"></p-toast>
 </div>

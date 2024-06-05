@@ -1,3 +1,24 @@
+/* Container styling */
+.container {
+    padding-top: 80px; 
+}
+
+/* Navbar styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Job Information Dialog */
+.job-information p-dialog {
+    z-index: 1050;
+}
+
+/* Form container styling */
 .form-container {
     max-width: 600px;
     margin: 0 auto;
@@ -7,12 +28,7 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-.job-information {
-    position: fixed;
-    z-index: 10;
-}
-
-
+/* Form styling */
 .form {
     display: flex;
     flex-direction: column;
@@ -23,18 +39,18 @@
 }
 
 label {
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
     font-size: medium;
-
+    font-family: sans-serif;
+    color: #495057;
 }
 
 .label-group {
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
     font-size: x-large;
     margin-bottom: 5px;
-
+    font-family: sans-serif;
+    color: #495057;
 }
 
 input[type="text"],
@@ -48,13 +64,15 @@ input[type="file"] {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    font-size: 18px;
+    font-family:sans-serif;
+    color: #495057;
 }
 
 .date-input {
     display: flex;
     width: 100%;
 }
-
 
 .form-section {
     border-top: 1px solid #ccc;
@@ -65,51 +83,47 @@ input[type="file"] {
 h3 {
     font-size: 1.2em;
     margin-bottom: 10px;
+    font-family: sans-serif;
+    color: #495057;
 }
 
-/*  file */
+/* File upload styling */
+.form-group.file label {
+    font-size: 1rem;
+    color: #495057;
+}
 
-
-
-
-/* checkbox */
-
-input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #ccc;
-    border-radius: 4px;
+.form-group.file input[type="file"] {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #ffffff;
     cursor: pointer;
 }
 
-input[type="checkbox"]:checked {
-    background-color: #007bff;
-    border-color: #007bff;
+.form-group.file input[type="file"]::file-selector-button {
+    background-color: #495057;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-input[type="checkbox"]::after {
-    content: "\2713"; 
-    font-size: 16px;
-    color: white;
-    display: block;
-    text-align: center;
-    line-height: 20px;
-    visibility: hidden;
-}
-
-input[type="checkbox"]:checked::after {
-    visibility: visible;
-}
-
-
-/* primeng css */
-
+/* PrimeNG button styles */
 :host ::ng-deep .p-button {
     margin: 0 .5rem 0 0;
     min-width: 10rem;
+}
+
+:host ::ng-deep .p-button-outlined {
+    border-color: #495057;
+    color: #495057;
+}
+
+:host ::ng-deep .p-button-outlined.p-button-rounded {
+    border-radius: 50px;
 }
 
 p {
@@ -124,4 +138,56 @@ p {
 
 :host ::ng-deep .p-dialog .p-button {
     min-width: 6rem;
+}
+
+/* Checkbox styling */
+.form-group input[type="checkbox"] {
+    margin-left: 10px;
+    transform: scale(1.2);
+}
+
+.form-group input[type="checkbox"]:checked + label {
+    font-weight: bold;
+    color: #495057;
+}
+
+
+.title {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-radius: 10px;
+}
+
+.upload {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.upload .form-group {
+    flex: 0 0 48%;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+/* skills */
+
+.skills {
+    display: flex;
+    align-items: center;
+}
+
+.skills input[type="text"] {
+    flex: 1; 
+    margin-right: 10px; 
+}
+
+.single-skill {
+    margin-right: 5px;
 }

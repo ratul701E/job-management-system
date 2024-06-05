@@ -8,6 +8,9 @@ import { CalendarModule } from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {FileUploadModule} from 'primeng/fileupload';
 import {DialogModule} from 'primeng/dialog';
+import {MenubarModule} from 'primeng/menubar';
+import {ToastModule} from 'primeng/toast';
+import { ChipModule } from 'primeng/chip';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +18,7 @@ import { JobComponent } from './components/job/job.component';
 import { HomeComponent } from './components/home/home.component';
 import { JobItemComponent } from './components/job-item/job-item.component';
 import { ApplyComponent } from './components/apply/apply.component';
+import { ApplyNavComponent } from './components/apply-nav/apply-nav.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,8 @@ import { ApplyComponent } from './components/apply/apply.component';
     JobComponent,
     HomeComponent,
     JobItemComponent,
-    ApplyComponent
+    ApplyComponent,
+    ApplyNavComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,11 @@ import { ApplyComponent } from './components/apply/apply.component';
     CalendarModule,
     BrowserAnimationsModule,
     FileUploadModule,
-    DialogModule
+    DialogModule,
+    MenubarModule,
+    ToastModule,
+    ChipModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

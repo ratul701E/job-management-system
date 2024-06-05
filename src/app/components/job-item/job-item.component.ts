@@ -34,7 +34,6 @@ export class JobItemComponent implements OnInit {
 
     this.jobService.getAllApplicationByID(this.jobId).subscribe(job => {
       this.job = job
-      console.log(this.job)
     })
 
   }
