@@ -157,8 +157,11 @@
                 </div>
             </div>
 
+            <button pButton pRipple type="button" label="Clear Fields" class="p-button-outlined p-button-rounded p-button-danger"
+                [style]="{'margin-bottom': '.5em', 'width' : '100%'}" (click)="clear()"></button>
             <button pButton pRipple type="button" label="Apply" class="p-button-outlined p-button-rounded p-button-help"
-                [style]="{'margin-left': '.5em', 'width' : '100%'}" (click)="handleApply()"></button>
+                [style]="{'width' : '100%'}" (click)="handleApply()"></button>
+            
         </div>
     </div>
 

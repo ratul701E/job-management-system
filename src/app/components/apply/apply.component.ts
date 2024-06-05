@@ -56,7 +56,10 @@ export class ApplyComponent implements OnInit {
   }
 
   addSkill() {
-    if (!(this.skill.length > 1)) return;
+    if (!(this.skill.length > 1)) {
+      this.messageService.add({ key: 'tc', severity: 'warn', summary: 'Cannot Added', detail: 'A skill name cannot be empty' });
+      return
+    }
     this.application.skills.push(this.skill)
     this.skill = ''
   }
@@ -153,6 +156,31 @@ export class ApplyComponent implements OnInit {
     this.applicationService.postApplication(this.application).subscribe(err => this.submitResult = !err)
     //chk
     this.messageService.add({ key: 'tc', severity: 'success', summary: 'Congratulation', detail: 'Application is submitted successfully' });
+  }
+
+  clear() {
+    this.application = {
+      isAiubian: false,
+      isBscCompleted: false,
+      isMscCompleted: false,
+      name: '',
+      phone: '',
+      dob: this.formatDate(new Date()),
+      email: '',
+      aiubId: '',
+      bscUniversity: '',
+      bscDepartment: '',
+      bscCGPA: 0,
+      mscUniversity: '',
+      mscDepartment: '',
+      mscCGPA: 0,
+      bscGraduationYear: new Date().getFullYear(),
+      bscAdmissionYear: new Date().getFullYear(),
+      mscGraduationYear: new Date().getFullYear(),
+      mscAdmissionYear: new Date().getFullYear(),
+      skills: []
+    }
+    this.messageService.add({ key: 'tc', severity: 'info', summary: 'Fileds Cleared', detail: 'All data fileds are cleared' });
   }
 
 
