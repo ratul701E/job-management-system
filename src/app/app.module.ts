@@ -13,6 +13,7 @@ import { ToastModule } from 'primeng/toast';
 import { ChipModule } from 'primeng/chip';
 import { TableModule } from 'primeng/table';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -56,6 +57,7 @@ import { UpdateOpeningComponent } from './components/update-opening/update-openi
     ChipModule,
     TableModule,
     ConfirmDialogModule,
+    InputSwitchModule
   ],
   providers: [],
   bootstrap: [AppComponent]

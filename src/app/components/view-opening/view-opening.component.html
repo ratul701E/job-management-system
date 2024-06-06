@@ -1,5 +1,6 @@
 <div class="options">
-    <button pButton pRipple type="button" label="Add New Openings" icon="pi pi-plus" class="p-button-raised p-button-info"></button>
+    <button pButton pRipple type="button" label="Add New Openings" icon="pi pi-plus"
+        class="p-button-raised p-button-info"></button>
 </div>
 
 <div class="card">
@@ -17,6 +18,7 @@
                 <th class="table-header">Requirements</th>
                 <th class="table-header">Responsibilities</th>
                 <th class="table-header">Max Applications</th>
+                <th class="table-header">Accepting Response</th>
             </tr>
         </ng-template>
         <!-- Table Body -->
@@ -31,6 +33,8 @@
                 <td>{{ job.requirements.length }}</td>
                 <td>{{ job.responsibilities.length }}</td>
                 <td>{{ job.maximumApplication }}</td>
+                <td><p-inputSwitch [(ngModel)]="check"></p-inputSwitch>
+                </td>
             </tr>
         </ng-template>
     </p-table>
@@ -38,7 +42,8 @@
 
 
 <!-- Dialog -->
-<p-dialog  header="{{'#' + job?.jobId + ' ' + job?.jobName }}" [(visible)]="displayBasic" [draggable]="false" [style]="{ 'max-width': '600px' }" class="job-dialog">
+<p-dialog header="{{'#' + job?.jobId + ' ' + job?.jobName }}" [(visible)]="displayBasic" [draggable]="false"
+    [style]="{ 'max-width': '600px' }" class="job-dialog">
     <div class="dialog-content">
         <div class="job-details">
             <div class="job-detail">
@@ -57,9 +62,12 @@
     </div>
     <ng-template pTemplate="footer">
         <span class="p-buttonset">
-            <button (click)="updateJob()" pButton pRipple class="p-button-help" label="Update" icon="pi pi-pencil"></button>
-            <button (click)="viewApplications()" pButton pRipple class="p-button-info" label="View Applications" icon="pi pi-eye"></button>
-            <button (click)="showDialog(false)" pButton pRipple class="p-button-danger" label="Close" icon="pi pi-times"></button>
+            <button (click)="updateJob()" pButton pRipple class="p-button-help" label="Update"
+                icon="pi pi-pencil"></button>
+            <button (click)="viewApplications()" pButton pRipple class="p-button-info" label="View Applications"
+                icon="pi pi-eye"></button>
+            <button (click)="showDialog(false)" pButton pRipple class="p-button-danger" label="Close"
+                icon="pi pi-times"></button>
         </span>
     </ng-template>
 </p-dialog>

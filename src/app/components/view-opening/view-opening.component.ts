@@ -17,6 +17,7 @@ export class ViewOpeningComponent implements OnInit {
   jobs: Job[] = []
   job: Job | undefined
   displayBasic: boolean = false
+  check: boolean = true
   constructor(private jobService: JobService, private router: Router) { }
 
   ngOnInit(): void {
