@@ -57,3 +57,35 @@
     font-family: sans-serif; 
     font-size: 16px;
 }
+
+
+/*  */
+/* Styling for the confirmation dialog */
+:host ::ng-deep .p-dialog {
+    font-family: 'Roboto', sans-serif;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+    background-color: #b9a02f;
+    color: #fff;
+    border-radius: 8px 8px 0 0;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-footer {
+    border-top: none;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-content {
+    padding: 20px;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-footer .p-button {
+    margin: 0 8px;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-footer .p-button .pi {
+    margin-right: 4px;
+}

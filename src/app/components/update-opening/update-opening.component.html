@@ -13,31 +13,45 @@
     </div>
     <div class="form-group">
         <label for="publishDate" class="form-label">Publish Date</label>
-        <input type="text" id="publishDate" name="publishDate" [(ngModel)]="job.publishDate" class="form-input" required>
+        <input type="text" id="publishDate" name="publishDate" [(ngModel)]="job.publishDate" class="form-input"
+            required>
     </div>
     <div class="form-group">
         <label for="description" class="form-label">Description</label>
-        <textarea id="description" name="description" [(ngModel)]="job.description" class="form-textarea" rows="4"></textarea>
+        <textarea id="description" name="description" [(ngModel)]="job.description" class="form-textarea"
+            rows="4"></textarea>
     </div>
     <div class="form-group">
         <label for="requirements" class="form-label">Requirements (Separate each requirement by a new line)</label>
-        <textarea id="requirements" name="requirements" [(ngModel)]="formattedRequirements" class="form-textarea" rows="4" required></textarea>
+        <textarea id="requirements" name="requirements" [(ngModel)]="formattedRequirements" class="form-textarea"
+            rows="4" required></textarea>
     </div>
     <div class="form-group">
-        <label for="responsibilities" class="form-label">Responsibilities (Separate each responsibilities by a new line)</label>
-        <textarea id="responsibilities" name="responsibilities" [(ngModel)]="formattedResponsibilities" class="form-textarea" rows="4" required></textarea>
+        <label for="responsibilities" class="form-label">Responsibilities (Separate each responsibilities by a new
+            line)</label>
+        <textarea id="responsibilities" name="responsibilities" [(ngModel)]="formattedResponsibilities"
+            class="form-textarea" rows="4" required></textarea>
     </div>
     <div class="form-group">
         <label for="maximumApplication" class="form-label">Max Applications</label>
-        <input type="number" id="maximumApplication" name="maximumApplication" [(ngModel)]="job.maximumApplication" class="form-input" required>
+        <input type="number" id="maximumApplication" name="maximumApplication" [(ngModel)]="job.maximumApplication"
+            class="form-input" required>
     </div>
 
     <button pButton pRipple type="button" label="Update" class="p-button-rounded p-button-rounded p-button-info"
-    [style]="{'width' : '100%'}" (click)="updateJob()"></button>
+        [style]="{'width' : '100%'}" (click)="updateJob()"></button>
 
 </form>
 
 <!-- conf -->
-<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-confirmDialog #cd [style]="{width: '50vw'}">
+    <ng-template pTemplate="header">
+        <h3>Are You Sure?</h3>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button class="p-button-raised p-button-warning" type="button" pButton icon="pi pi-times" label="No Cancel" (click)="cd.reject()"></button>
+        <button class="p-button-raised p-button-danger" type="button" pButton icon="pi pi-check" label="Yes Update" (click)="cd.accept()"></button>
+    </ng-template>
+</p-confirmDialog>
 <!-- toast -->
 <p-toast position="top-center" key="tc"></p-toast>
