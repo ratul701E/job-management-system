@@ -32,7 +32,7 @@ export class JobItemComponent implements OnInit {
     this.AcRouter.queryParams.subscribe((params: any) => this.jobId = params.jobId)
 
 
-    this.jobService.getAllApplicationByID(this.jobId).subscribe(job => {
+    this.jobService.getJobByID(this.jobId).subscribe(job => {
       this.job = job
     })
 

@@ -1,5 +1,5 @@
 export interface Application {
-    applicationId?: number
+    id?: number
     isAiubian: boolean;
     isBscCompleted: boolean;
     isMscCompleted: boolean;

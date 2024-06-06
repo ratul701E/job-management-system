@@ -1,0 +1,65 @@
+<div class="options">
+    <button pButton pRipple type="button" label="Add New Openings" icon="pi pi-plus" class="p-button-raised p-button-info"></button>
+</div>
+
+<div class="card">
+    <p-table [value]="jobs" selectionMode="single" [(selection)]="job" dataKey="jobId" responsiveLayout="scroll"
+        (onRowSelect)="onSelect()" (onRowUnselect)="onUnselect()" class="custom-table">
+        <!-- Table Header -->
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="table-header">Job ID</th>
+                <th class="table-header">Job Name</th>
+                <th class="table-header">Location</th>
+                <th class="table-header">Salary</th>
+                <th class="table-header">Publish Date</th>
+                <th class="table-header">Description</th>
+                <th class="table-header">Requirements</th>
+                <th class="table-header">Responsibilities</th>
+                <th class="table-header">Max Applications</th>
+            </tr>
+        </ng-template>
+        <!-- Table Body -->
+        <ng-template pTemplate="body" let-job>
+            <tr [pSelectableRow]="job" class="table-row">
+                <td>#{{ job.jobId }}</td>
+                <td>{{ job.jobName }}</td>
+                <td>{{ job.location }}</td>
+                <td>{{ job.salary }}</td>
+                <td>{{ job.publishDate }}</td>
+                <td>{{ job.description.length > 10 ? job.description.substring(0, 20) + '...' : job.description }}</td>
+                <td>{{ job.requirements.length }}</td>
+                <td>{{ job.responsibilities.length }}</td>
+                <td>{{ job.maximumApplication }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+
+<!-- Dialog -->
+<p-dialog  header="{{'#' + job?.jobId + ' ' + job?.jobName }}" [(visible)]="displayBasic" [draggable]="false" [style]="{ 'max-width': '600px' }" class="job-dialog">
+    <div class="dialog-content">
+        <div class="job-details">
+            <div class="job-detail">
+                <span class="detail-label">Job ID:</span>
+                <span class="detail-value">{{ job?.jobId }}</span>
+            </div>
+            <div class="job-detail">
+                <span class="detail-label">Published Date:</span>
+                <span class="detail-value">{{ job?.publishDate }}</span>
+            </div>
+            <div class="job-detail">
+                <span class="detail-label">Salary:</span>
+                <span class="detail-value">{{ job?.salary }}</span>
+            </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <span class="p-buttonset">
+            <button (click)="updateJob()" pButton pRipple class="p-button-help" label="Update" icon="pi pi-pencil"></button>
+            <button (click)="viewApplications()" pButton pRipple class="p-button-info" label="View Applications" icon="pi pi-eye"></button>
+            <button (click)="showDialog(false)" pButton pRipple class="p-button-danger" label="Close" icon="pi pi-times"></button>
+        </span>
+    </ng-template>
+</p-dialog>

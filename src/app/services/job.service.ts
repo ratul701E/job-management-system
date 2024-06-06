@@ -35,11 +35,19 @@ export class JobService {
     );
   }
 
-  getAllApplicationByID(jobId: number): Observable<Job> {
+  getJobByID(jobId: number): Observable<Job> {
     return this.http.get<ApiResponseJob>(`${this.url}/${jobId}`, httpOptions).pipe(
       map(response => {
         return response.data
       })
     );
+  }
+
+  updateJob(jobId: number, job: Job): Observable<Job> {
+    return this.http.patch<ApiResponseJob>(this.url + `/${jobId}`, job, httpOptions).pipe(
+      map(response => {
+        return response.data
+      })
+    )
   }
 }

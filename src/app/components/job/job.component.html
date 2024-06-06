@@ -1,12 +1,11 @@
 <div class="container">
     <div class="card" *ngFor="let job of jobs">
-        <p-card [header]="job.jobName" [subheader]="'Publised: ' + job.publishDate" [style]="{width: '360px'}"
+        <p-card [header]="'#' + job.jobId + ' ' + job.jobName" [subheader]="'Publised: ' + job.publishDate" [style]="{width: '360px'}"
             styleClass="p-card-shadow">
             <ng-template pTemplate="header">
                 <img alt="Card" class="job-logo" src="../../../assets/aiub.png">
             </ng-template>
             <p>
-                {{job.jobId}} <br>
                 <b>Job Location: </b> {{job.location}} <br>
                 <b>Salary: </b> {{job.salary}} <br>
                 <b>Description: </b> {{job.description}} <br>

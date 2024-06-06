@@ -37,11 +37,11 @@ export class ApplicationService {
     )
   }
 
-  // getAllJobs(): Observable<Application[]> {
-  //   return this.http.get<ApiResponseJobs>(this.url, httpOptions).pipe(
-  //     map(response => response.data)
-  //   );
-  // }
+  getAllApplications(): Observable<Application[]> {
+    return this.http.get<ApiResponseApplications>(this.url, httpOptions).pipe(
+      map(response => response.data)
+    );
+  }
 
   // getAllApplicationByID(appId: number): Observable<Application> {
   //   return this.http.get<ApiResponseJob>(`${this.url}/${appId}`, httpOptions).pipe(
