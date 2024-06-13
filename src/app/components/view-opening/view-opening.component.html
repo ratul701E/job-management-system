@@ -1,5 +1,7 @@
+<app-admin-nav></app-admin-nav>
+
 <div class="options">
-    <button pButton pRipple type="button" label="Add New Openings" icon="pi pi-plus"
+    <button pButton pRipple type="button" routerLink="/add-opening" label="Add New Openings" icon="pi pi-plus"
         class="p-button-raised p-button-info"></button>
 </div>
 
@@ -33,7 +35,7 @@
                 <td>{{ job.requirements.length }}</td>
                 <td>{{ job.responsibilities.length }}</td>
                 <td>{{ job.maximumApplication }}</td>
-                <td><p-inputSwitch [(ngModel)]="check"></p-inputSwitch>
+                <td><p-inputSwitch [(ngModel)]="job.acceptingResponse"></p-inputSwitch>
                 </td>
             </tr>
         </ng-template>

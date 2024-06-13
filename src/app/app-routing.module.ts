@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: "jobs", component: JobComponent },
   { path: "job", component: JobItemComponent },
   { path: "apply", component: ApplyComponent },
-  { path: "opennings", component: ViewOpeningComponent },
+  { path: "openings", component: ViewOpeningComponent },
   { path: "applications", component: ViewApplicationsComponent },
   { path: "update-opening", component: UpdateOpeningComponent },
   { path: "add-opening", component: AddOpeningComponent },

@@ -43,11 +43,11 @@ export class ApplicationService {
     );
   }
 
-  // getAllApplicationByID(appId: number): Observable<Application> {
-  //   return this.http.get<ApiResponseJob>(`${this.url}/${appId}`, httpOptions).pipe(
-  //     map(response => {
-  //       return response.data
-  //     })
-  //   );
-  // }
+  getAllApplicationByID(appId: number): Observable<Application> {
+    return this.http.get<ApiResponseApplication>(`${this.url}/${appId}`, httpOptions).pipe(
+      map(response => {
+        return response.data
+      })
+    );
+  }
 }

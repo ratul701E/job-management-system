@@ -22,7 +22,8 @@ export class UpdateOpeningComponent implements OnInit {
     description: '',
     requirements: [],
     responsibilities: [],
-    maximumApplication: 0
+    maximumApplication: 0,
+    acceptingResponse: false
   }
 
   formattedRequirements: string = ''

@@ -1,3 +1,5 @@
+<app-admin-nav></app-admin-nav>
+
 <div class="card">
     <p-table [value]="applications" selectionMode="single" [(selection)]="selectedApplication" dataKey="id"
         responsiveLayout="scroll" (onRowSelect)="onSelect()" (onRowUnselect)="onUnselect()" class="custom-table">
@@ -10,8 +12,8 @@
                 <th class="table-header">AIUBian</th>
                 <th class="table-header">BSc University</th>
                 <th class="table-header">MSc University</th>
-                <th  class="table-header">BSc Status</th>
-                <th  class="table-header">MSc Status</th>
+                <th class="table-header">BSc Status</th>
+                <th class="table-header">MSc Status</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-application>
@@ -35,3 +37,80 @@
         </ng-template>
     </p-table>
 </div>
+
+<!-- details -->
+
+<p-dialog header="Application Details" [draggable]="false" [(visible)]="showAppDetails" [style]="{width: '70vw'}">
+    <div class="application-details">
+        <h1>Application ID: {{selectedApplication.id}}</h1>
+        <div class="detail-group">
+            <label>Name:</label>
+            <span>{{selectedApplication.name}}</span>
+        </div>
+        <div class="detail-group">
+            <label>Email:</label>
+            <span>{{selectedApplication.email}}</span>
+        </div>
+        <div class="detail-group">
+            <label>Phone:</label>
+            <span>{{selectedApplication.phone}}</span>
+        </div>
+        <div class="detail-group">
+            <label>Date of Birth:</label>
+            <span>{{selectedApplication.dob}}</span>
+        </div>
+        <div *ngIf="selectedApplication.isAiubian" class="detail-group">
+            <label>AIUB ID:</label>
+            <span>{{selectedApplication.aiubId}}</span>
+        </div>
+        <div class="detail-group">
+            <label>BSc University:</label>
+            <span>{{selectedApplication.bscUniversity}}</span>
+        </div>
+        <div class="detail-group">
+            <label>BSc Department:</label>
+            <span>{{selectedApplication.bscDepartment}}</span>
+        </div>
+        <div class="detail-group">
+            <label>BSc CGPA:</label>
+            <span>{{selectedApplication.bscCGPA}}</span>
+        </div>
+        <div class="detail-group">
+            <label>BSc Admission Year:</label>
+            <span>{{selectedApplication.bscAdmissionYear}}</span>
+        </div>
+        <div class="detail-group">
+            <label>BSc Graduation Year:</label>
+            <span>{{selectedApplication.bscGraduationYear}}</span>
+        </div>
+        <div class="detail-group">
+            <label>MSc University:</label>
+            <span>{{selectedApplication.mscUniversity}}</span>
+        </div>
+        <div class="detail-group">
+            <label>MSc Department:</label>
+            <span>{{selectedApplication.mscDepartment}}</span>
+        </div>
+        <div class="detail-group">
+            <label>MSc CGPA:</label>
+            <span>{{selectedApplication.mscCGPA}}</span>
+        </div>
+        <div class="detail-group">
+            <label>MSc Admission Year:</label>
+            <span>{{selectedApplication.mscAdmissionYear}}</span>
+        </div>
+        <div class="detail-group">
+            <label>MSc Graduation Year:</label>
+            <span>{{selectedApplication.mscGraduationYear}}</span>
+        </div>
+        <div class="detail-group">
+            <label>Skills:</label>
+            <span>{{selectedApplication.skills.join(', ')}}</span>
+        </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <br>
+        <button icon="pi pi-check" (click)="showAppDetails=false" pButton pRipple type="button" label="Ok" class="p-button-outlined p-button-rounded p-button-info"></button>
+    </ng-template>
+</p-dialog>

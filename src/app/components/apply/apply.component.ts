@@ -25,6 +25,7 @@ export class ApplyComponent implements OnInit {
   submitResult: boolean = false
 
   application: Application = {
+    id: 0,
     isAiubian: false,
     isBscCompleted: false,
     isMscCompleted: false,
@@ -160,6 +161,7 @@ export class ApplyComponent implements OnInit {
 
   clear() {
     this.application = {
+      id: 0,
       isAiubian: false,
       isBscCompleted: false,
       isMscCompleted: false,

@@ -22,7 +22,8 @@ export class JobItemComponent implements OnInit {
     description: "null",
     requirements: ["null"],
     responsibilities: ["null"],
-    maximumApplication: 50
+    maximumApplication: 0,
+    acceptingResponse: false
   };
 
   constructor(private jobService: JobService, private AcRouter: ActivatedRoute, private router: Router) { }

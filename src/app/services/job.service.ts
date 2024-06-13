@@ -50,4 +50,11 @@ export class JobService {
       })
     )
   }
+  addJob(jobId: number, job: Job): Observable<Job> {
+    return this.http.post<ApiResponseJob>(this.url, job, httpOptions).pipe(
+      map(response => {
+        return response.data
+      })
+    )
+  }
 }

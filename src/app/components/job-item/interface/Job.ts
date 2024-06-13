@@ -8,4 +8,5 @@ export interface Job {
     requirements: string[];
     responsibilities: string[];
     maximumApplication: number;
+    acceptingResponse: boolean;
 }

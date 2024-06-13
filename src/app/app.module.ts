@@ -27,6 +27,8 @@ import { ViewOpeningComponent } from './components/view-opening/view-opening.com
 import { ViewApplicationsComponent } from './components/view-applications/view-applications.component';
 import { AddOpeningComponent } from './components/add-opening/add-opening.component';
 import { UpdateOpeningComponent } from './components/update-opening/update-opening.component';
+import { AdminNavComponent } from './components/admin-nav/admin-nav.component';
+import { SingleApplicationComponent } from './components/single-application/single-application.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { UpdateOpeningComponent } from './components/update-opening/update-openi
     ViewOpeningComponent,
     ViewApplicationsComponent,
     AddOpeningComponent,
-    UpdateOpeningComponent
+    UpdateOpeningComponent,
+    AdminNavComponent,
+    SingleApplicationComponent
   ],
   imports: [
     BrowserModule,
