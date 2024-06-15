@@ -1,0 +1,104 @@
+<app-admin-nav></app-admin-nav>
+
+<div class="options">
+    <button pButton pRipple type="button" routerLink="/add-opening" label="Add New Openings" icon="pi pi-plus"
+        class="p-button-raised p-button-info"></button>
+</div>
+
+<div class="card">
+    <p-table
+        #dt
+        [value]="jobs"
+        dataKey="jobId"
+        [rows]="25"
+        [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[5, 10, 25, 50]"
+        [loading]="loading"
+        [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [globalFilterFields]="['jobName', 'location', 'salary', 'publishDate', 'maximumApplication', 'acceptingResponse']"
+        [tableStyle]="{ 'min-width': '75rem' }"
+        responsiveLayout="scroll"
+        selectionMode="single"
+        (onRowSelect)="onSelect()"
+        (onRowUnselect)="onUnselect()"
+        [(selection)]="job"
+        class="custom-table"
+    >
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:12%">Job ID</th>
+                <th style="width:20%">Job Name</th>
+                <th style="width:15%">Location</th>
+                <th style="width:20%">Salary</th>
+                <th style="width:15%">Publish Date</th>
+                <th style="width:18%">Max Applications</th>
+                <th style="width:10%">Accepting Response</th>
+            </tr>
+            
+            <tr>
+                <th><p-columnFilter type="text" field="jobId"></p-columnFilter></th>
+                <th><p-columnFilter type="text" field="jobName"></p-columnFilter></th>
+                <th><p-columnFilter type="text" field="location"></p-columnFilter></th>
+                <th><p-columnFilter type="numeric" field="salary"></p-columnFilter></th>
+                <th><p-columnFilter type="date" field="publishDate"></p-columnFilter></th>
+                <th><p-columnFilter type="numeric" field="maximumApplication"></p-columnFilter></th>
+                <th><p-columnFilter type="boolean" field="acceptingResponse"></p-columnFilter></th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-job>
+            <tr [pSelectableRow]="job">
+                <td>#{{ job.jobId }}</td>
+                <td>{{ job.jobName }}</td>
+                <td>{{ job.location }}</td>
+                <td>{{ job.salary }}</td>
+                <td>{{ job.publishDate }}</td>
+                <td>{{ job.maximumApplication }}</td>
+                <td>
+                    <p-inputSwitch [(ngModel)]="job.acceptingResponse"></p-inputSwitch>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="10">No job openings found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+
+
+<!-- Dialog -->
+<p-dialog header="{{'#' + job?.jobId + ' ' + job?.jobName }}" [(visible)]="displayBasic" [draggable]="false"
+    [style]="{ 'max-width': '600px' }" class="job-dialog">
+    <div class="dialog-content">
+        <div class="job-details">
+            <div class="job-detail">
+                <span class="detail-label">Job ID:</span>
+                <span class="detail-value">{{ job?.jobId }}</span>
+            </div>
+            <div class="job-detail">
+                <span class="detail-label">Published Date:</span>
+                <span class="detail-value">{{ job?.publishDate }}</span>
+            </div>
+            <div class="job-detail">
+                <span class="detail-label">Salary:</span>
+                <span class="detail-value">{{ job?.salary }}</span>
+            </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <span class="p-buttonset">
+            <button (click)="updateJob()" pButton pRipple class="p-button-help" label="Update"
+                icon="pi pi-pencil"></button>
+            <button (click)="viewApplications()" pButton pRipple class="p-button-info" label="View Applications"
+                icon="pi pi-eye"></button>
+            <button (click)="showDialog(false)" pButton pRipple class="p-button-danger" label="Close"
+                icon="pi pi-times"></button>
+        </span>
+    </ng-template>
+</p-dialog>

@@ -105,5 +105,8 @@
       }
     }
   },
-  "defaultProject": "job-management-system"
+  "defaultProject": "job-management-system",
+  "cli": {
+    "analytics": false
+  }
 }

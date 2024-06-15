@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-opening',
-  templateUrl: './view-opening.component.html',
+  templateUrl: './view-opening.componentv2.html',
   styleUrls: ['./view-opening.component.css'],
 
 })
@@ -18,13 +18,17 @@ export class ViewOpeningComponent implements OnInit {
   job: Job | undefined
   displayBasic: boolean = false
   check: boolean = true
+  loading: boolean = true
   constructor(private jobService: JobService, private router: Router) { }
+
 
   ngOnInit(): void {
     this.jobService.getAllJobs().subscribe(jobs => {
       this.jobs = jobs
-      this.job = this.jobs[0]
+      //this.job = this.jobs[0]
+      this.loading = false
     })
+    
   }
 
   onSelect() {
