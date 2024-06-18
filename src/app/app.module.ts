@@ -14,6 +14,9 @@ import { ChipModule } from 'primeng/chip';
 import { TableModule } from 'primeng/table';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {InputSwitchModule} from 'primeng/inputswitch';
+import { CheckboxModule } from 'primeng/checkbox';
+import {StyleClassModule} from 'primeng/styleclass';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -29,6 +32,10 @@ import { AddOpeningComponent } from './components/add-opening/add-opening.compon
 import { UpdateOpeningComponent } from './components/update-opening/update-opening.component';
 import { AdminNavComponent } from './components/admin-nav/admin-nav.component';
 import { SingleApplicationComponent } from './components/single-application/single-application.component';
+import { LoginComponent } from './components/login/login.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { RippleModule } from 'primeng/ripple';
 
 @NgModule({
   declarations: [
@@ -43,7 +50,8 @@ import { SingleApplicationComponent } from './components/single-application/sing
     AddOpeningComponent,
     UpdateOpeningComponent,
     AdminNavComponent,
-    SingleApplicationComponent
+    SingleApplicationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +69,12 @@ import { SingleApplicationComponent } from './components/single-application/sing
     ChipModule,
     TableModule,
     ConfirmDialogModule,
-    InputSwitchModule
+    InputSwitchModule,
+    CheckboxModule,
+    StyleClassModule,
+    InputTextModule,
+    PasswordModule,
+    RippleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

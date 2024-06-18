@@ -9,6 +9,7 @@ import { ViewOpeningComponent } from './components/view-opening/view-opening.com
 import { ViewApplicationsComponent } from './components/view-applications/view-applications.component';
 import { UpdateOpeningComponent } from './components/update-opening/update-opening.component';
 import { AddOpeningComponent } from './components/add-opening/add-opening.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: "applications", component: ViewApplicationsComponent },
   { path: "update-opening", component: UpdateOpeningComponent },
   { path: "add-opening", component: AddOpeningComponent },
+  { path: "login", component: LoginComponent },
 ];
 
 @NgModule({
