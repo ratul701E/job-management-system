@@ -1,13 +1,15 @@
 
 .login-container {
-    background: var(--surface-card);
-    padding: 2rem;
-    border-radius: 0.5rem;
-    box-shadow: var(--shadow-2);
-    max-width: 400px;
-    margin: 0 auto;
-    border: 2px solid gray; 
-  }
+  background: var(--surface-card);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-2);
+  max-width: 400px;
+  margin: 0 auto; /* This centers the container horizontally */
+  border: 2px solid rgb(173, 171, 171);
+  margin-top: 5%; /* Adjust the top margin as needed */
+  position: relative; /* Add position relative */
+}
   
   .login-header {
     text-align: center;
