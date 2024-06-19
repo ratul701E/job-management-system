@@ -37,6 +37,7 @@ export class LoginComponent {
       if(dto.tokenExist) {
         //success
         this.router.navigate(['/openings'])
+        this.authService.setToken(dto.token)
         console.log(dto)
       }
       else {
