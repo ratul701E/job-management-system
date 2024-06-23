@@ -1,9 +1,8 @@
-/* Container styling */
+
 .container {
     padding-top: 80px; 
 }
 
-/* Navbar styling */
 .navbar {
     position: fixed;
     top: 0;
@@ -13,12 +12,10 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Job Information Dialog */
 .job-information p-dialog {
     z-index: 1050;
 }
 
-/* Form container styling */
 .form-container {
     max-width: 600px;
     margin: 0 auto;
@@ -28,7 +25,6 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Form styling */
 .form {
     display: flex;
     flex-direction: column;

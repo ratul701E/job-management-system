@@ -32,4 +32,8 @@ export class JobComponent implements OnInit {
     this.router.navigate(["/apply"], {queryParams: {'jobId' : jobId}})
   }
 
+  goBack() {
+    this.router.navigate(["/"])
+  }
+
 }

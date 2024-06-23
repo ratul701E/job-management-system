@@ -35,7 +35,12 @@ export class AdminNavComponent {
         label: 'View Openings',
         icon: 'pi pi-list',
         command: () => this.onViewOpenings()
-      }
+      },
+      {
+        label: 'Add Opening',
+        icon: 'pi pi-plus',
+        command: () => this.router.navigate(['/add-opening'])
+      },
     ];
   }
 

@@ -16,6 +16,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import { CheckboxModule } from 'primeng/checkbox';
 import {StyleClassModule} from 'primeng/styleclass';
+import {DropdownModule} from 'primeng/dropdown';
+
 
 
 
@@ -77,6 +79,7 @@ import { AuthService } from './services/auth.service';
     InputTextModule,
     PasswordModule,
     RippleModule,
+    DropdownModule,
   ],
   providers: [
     AuthService,

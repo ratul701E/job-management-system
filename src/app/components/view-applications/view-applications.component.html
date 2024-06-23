@@ -14,27 +14,26 @@
         responsiveLayout="scroll" (onRowSelect)="onSelect()" (onRowUnselect)="onUnselect()" class="custom-table">
         <ng-template pTemplate="header">
             <tr>
+                <th class="table-header">ID</th>
                 <th class="table-header">Name</th>
                 <th class="table-header">Phone</th>
                 <th class="table-header">DOB</th>
                 <th class="table-header">Email</th>
                 <th class="table-header">AIUBian</th>
                 <th class="table-header">BSc University</th>
-                <th class="table-header">MSc University</th>
                 <th class="table-header">BSc Status</th>
                 <th class="table-header">MSc Status</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-application>
             <tr [pSelectableRow]="application" class="table-row">
+                <td>#{{application.id}}</td>
                 <td>{{application.name}}</td>
                 <td>{{application.phone}}</td>
                 <td>{{application.dob}}</td>
                 <td>{{application.email}}</td>
                 <td>{{application.isAiubian}}</td>
                 <td>{{application.bscUniversity}}</td>
-                <td>{{ application.mscUniversity.trim() ? application.mscUniversity : '-' }}</td>
-
                 <td [style.color]="application.isBscCompleted ? 'green' : 'red'">
                     {{ application.isBscCompleted ? 'Completed' : 'Incomplete' }}
                 </td>
@@ -128,6 +127,6 @@
 
     <ng-template pTemplate="footer">
         <br>
-        <button icon="pi pi-check" (click)="showAppDetails=false" pButton pRipple type="button" label="Ok" class="p-button-outlined p-button-rounded p-button-info"></button>
+        <button icon="pi pi-times" (click)="showAppDetails=false" pButton pRipple type="button" label="Close" class="p-button-outlined p-button-rounded p-button-info"></button>
     </ng-template>
 </p-dialog>

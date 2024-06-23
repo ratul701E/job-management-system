@@ -1,3 +1,9 @@
+<app-apply-nav (back)="goBack()"></app-apply-nav>
+
+<div class="header">
+    <h3 class="title">All Openings (Total {{jobs.length}})</h3>
+</div>
+
 <div class="container">
     <div class="card" *ngFor="let job of jobs">
         <p-card [header]="'#' + job.jobId + ' ' + job.jobName" [subheader]="'Publised: ' + job.publishDate" [style]="{width: '360px'}"
