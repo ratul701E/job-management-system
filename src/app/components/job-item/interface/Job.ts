@@ -1,3 +1,5 @@
+import { Application } from "src/app/Interface/Application";
+
 export interface Job {
     jobId: number;
     jobName: string;
@@ -9,4 +11,5 @@ export interface Job {
     responsibilities: string[];
     maximumApplication: number;
     acceptingResponse: boolean;
+    jobApplications?: Application[]
 }

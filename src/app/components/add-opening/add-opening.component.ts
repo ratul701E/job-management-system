@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { JobService } from 'src/app/services/job.service';
 import { Job } from '../job-item/interface/Job';
@@ -21,13 +21,13 @@ export class AddOpeningComponent {
     requirements: [],
     responsibilities: [],
     maximumApplication: 0,
-    acceptingResponse: true
+    acceptingResponse: true,
   }
 
   formattedRequirements: string = ''
   formattedResponsibilities: string = ''
 
-  constructor(private jobService: JobService, private confirmationService: ConfirmationService, private messageService: MessageService) { }
+  constructor(private router: Router, private jobService: JobService, private confirmationService: ConfirmationService, private messageService: MessageService) { }
 
   ngOnInit(): void {
 
@@ -62,5 +62,9 @@ export class AddOpeningComponent {
 
   acceptingResponseChange(){
     console.log(this.job.acceptingResponse)
+  }
+
+  goBack() {
+    this.router.navigate(["/openings"])
   }
 }

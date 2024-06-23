@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Job } from '../job-item/interface/Job';
 import { JobService } from 'src/app/services/job.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {ConfirmationService} from 'primeng/api';
 import { MessageService } from 'primeng/api';
 
@@ -23,13 +23,13 @@ export class UpdateOpeningComponent implements OnInit {
     requirements: [],
     responsibilities: [],
     maximumApplication: 0,
-    acceptingResponse: false
+    acceptingResponse: false,
   }
 
   formattedRequirements: string = ''
   formattedResponsibilities: string = ''
 
-  constructor(private jobService: JobService, private AcRouter: ActivatedRoute, private confirmationService: ConfirmationService, private messageService: MessageService) { }
+  constructor(private jobService: JobService, private router: Router, private AcRouter: ActivatedRoute, private confirmationService: ConfirmationService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.AcRouter.queryParams.subscribe((params: any) => this.jobId = params.jobId)
@@ -56,6 +56,10 @@ export class UpdateOpeningComponent implements OnInit {
     this.jobService.updateJob(this.job.jobId, this.job).subscribe(result => {})
     this.messageService.add({ key: 'tc', severity: 'success', summary: 'Updated', detail: 'Openings Updated Successfully' });
 
+  }
+
+  goBack() {
+    this.router.navigate(["/openings"])
   }
 
 }

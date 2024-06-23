@@ -2,10 +2,11 @@
 
 <div class="options">
     <button pButton pRipple type="button" routerLink="/add-opening" label="Add New Openings" icon="pi pi-plus"
-        class="p-button-raised p-button-info"></button>
+        class="p-button-raised p-button-success "></button>
 </div>
 
 <div class="card">
+    <h3 class="title">All Openings (Total {{jobs.length}}) </h3>
     <p-table
         #dt
         [value]="jobs"

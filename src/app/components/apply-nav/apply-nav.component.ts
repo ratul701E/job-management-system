@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -11,7 +12,7 @@ export class ApplyNavComponent implements OnInit {
   @Output() back = new EventEmitter();
   @Output() showJobInfo = new EventEmitter();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   items: MenuItem[] = [];
 
@@ -27,6 +28,11 @@ export class ApplyNavComponent implements OnInit {
         label: 'Job Information',
         icon: 'pi pi-info-circle',
         command: () => this.onShowJob()
+      },
+      {
+        label: 'Login',
+        icon: 'pi pi-sign-in',
+        command: () => this.router.navigate(['/login'])
       }
     ];
   }

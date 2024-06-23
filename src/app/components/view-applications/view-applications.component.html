@@ -1,6 +1,15 @@
-<app-admin-nav></app-admin-nav>
+<app-admin-nav (back)="goBack()"></app-admin-nav>
+
+<div class="job-info">
+    <h3 class="title">Job Information</h3>
+    <p class="value"><b>Job Id:</b> {{job?.jobId}}</p>
+    <p class="value"><b>Name:</b> {{job?.jobName}}</p>
+    <p class="value"><b>Location:</b> {{job?.location}}</p>
+    <p class="value"><b>Publish Date:</b> {{job?.publishDate}}</p>
+</div>
 
 <div class="card">
+    <h3 class="title">Applications (Total {{applications.length}}) </h3>
     <p-table [value]="applications" selectionMode="single" [(selection)]="selectedApplication" dataKey="id"
         responsiveLayout="scroll" (onRowSelect)="onSelect()" (onRowUnselect)="onUnselect()" class="custom-table">
         <ng-template pTemplate="header">
@@ -43,6 +52,10 @@
 <p-dialog header="Application Details" [draggable]="false" [(visible)]="showAppDetails" [style]="{width: '70vw'}">
     <div class="application-details">
         <h1>Application ID: {{selectedApplication.id}}</h1>
+        <div class="detail-group">
+            <button icon="pi pi-book" pButton pRipple type="button" label="View CV" class="p-button-outlined p-button-rounded p-button-info"></button>
+            <button icon="pi pi-file" pButton pRipple type="button" label="View Cover Letter" class="p-button-outlined p-button-rounded p-button-help"></button>
+        </div>
         <div class="detail-group">
             <label>Name:</label>
             <span>{{selectedApplication.name}}</span>
@@ -106,6 +119,10 @@
         <div class="detail-group">
             <label>Skills:</label>
             <span>{{selectedApplication.skills.join(', ')}}</span>
+        </div>
+        <div class="detail-group">
+            <button icon="pi pi-book" pButton pRipple type="button" label="View CV" class="p-button-outlined p-button-rounded p-button-info"></button>
+            <button icon="pi pi-file" pButton pRipple type="button" label="View Cover Letter" class="p-button-outlined p-button-rounded p-button-help"></button>
         </div>
     </div>
 

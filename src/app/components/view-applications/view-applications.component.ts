@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Application } from 'src/app/Interface/Application';
 import { ApplicationService } from 'src/app/services/application.service';
+import { JobService } from 'src/app/services/job.service';
+import { Job } from '../job-item/interface/Job';
 
 
 @Component({
@@ -11,7 +14,9 @@ import { ApplicationService } from 'src/app/services/application.service';
 })
 export class ViewApplicationsComponent implements OnInit {
 
-  applications: Application[]= []
+  jobId: number = 0
+  job: Job | undefined
+  applications: Application[] | any = []
   selectedApplication: Application = {
     id: 0,
     isAiubian: false,
@@ -33,14 +38,22 @@ export class ViewApplicationsComponent implements OnInit {
   showAppDetails: boolean = false
 
 
-  constructor(private applicationService: ApplicationService) { }
+  constructor(private applicationService: ApplicationService, private AcRouter: ActivatedRoute, private jobService: JobService, private router: Router) { }
 
   ngOnInit(): void {
-    this.applicationService.getAllApplications().subscribe(applications => {
-      this.applications = applications
-      this.selectedApplication = this.applications[0]
-      console.log(applications)
+    this.AcRouter.queryParams.subscribe((params: any) => {
+      this.jobService.getJobByID(params.jobId).subscribe(job => {
+        this.applications = job.jobApplications
+        this.job = job
+
+      })
     })
+
+    // this.applicationService.getAllApplications().subscribe(applications => {
+    //   this.applications = applications
+    //   this.selectedApplication = this.applications[0]
+    //   console.log(applications)
+    // })
   }
 
   onSelect() {
@@ -54,6 +67,10 @@ export class ViewApplicationsComponent implements OnInit {
 
   getCurrentId() : number {
     return this.selectedApplication.id
+  }
+
+  goBack() {
+    this.router.navigate(["/openings"])
   }
 
 }
