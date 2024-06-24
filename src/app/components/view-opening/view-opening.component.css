@@ -71,9 +71,29 @@
     margin-left: 10px;
 }
 
-.p-buttonset button {
-    margin-left: 10px;
+.job-dialog .button-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
+
+.job-dialog .button-row span {
+    display: inline-block;
+    margin-right: 10px; /* Adjust spacing between buttons */
+}
+
+.job-dialog .button-row span:last-child {
+    margin-right: 0; /* Remove margin from the last span */
+}
+
+.job-dialog .p-button {
+    width: 120px; /* Adjust the width of the buttons */
+    height: 40px; /* Adjust the height of the buttons */
+}
+
+/* .p-buttonset button {
+    margin-left: 10px;
+} */
 
 .p-buttonset button:first-child {
     margin-left: 0;

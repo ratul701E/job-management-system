@@ -1,8 +1,5 @@
 
-.container {
-    padding-top: 80px; 
-}
-
+/* Navbar */
 .navbar {
     position: fixed;
     top: 0;
@@ -12,19 +9,113 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.job-information p-dialog {
-    z-index: 1050;
+
+.job-form-and-details {
+    padding-top: 80px; 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between; 
+    align-items: stretch; 
 }
 
+/* Job Details */
+.job-detail-container,
 .form-container {
-    max-width: 600px;
-    margin: 0 auto;
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column; /* Ensures content starts from top */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
+.job-detail-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Start content from the top */
+}
+
+/* Ensuring same height for both sections */
+.job-detail-container,
+.form-container {
+    height: auto; /* Ensure it adjusts to content */
+}
+
+.job-card {
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.job-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.job-logo {
+    width: 64px;
+    height: 64px;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.job-header h2 {
+    margin: 10px 0;
+    color: #333333;
+}
+
+.job-header h4 {
+    margin: 5px 0;
+    color: #777777;
+}
+
+.job-content {
+    flex-grow: 1;
+}
+
+.job-content p {
+    color: #555555;
+    margin: 10px 0;
+}
+
+.job-content ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: #555555;
+}
+
+.job-content ul li {
+    margin: 5px 0;
+}
+
+.job-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Form Styling */
 .form {
     display: flex;
     flex-direction: column;
@@ -41,14 +132,6 @@ label {
     color: #495057;
 }
 
-.label-group {
-    font-weight: bold;
-    font-size: x-large;
-    margin-bottom: 5px;
-    font-family: sans-serif;
-    color: #495057;
-}
-
 input[type="text"],
 input[type="tel"],
 input[type="date"],
@@ -61,7 +144,7 @@ input[type="file"] {
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 18px;
-    font-family:sans-serif;
+    font-family: sans-serif;
     color: #495057;
 }
 
@@ -147,7 +230,6 @@ p {
     color: #495057;
 }
 
-
 .title {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 2rem;
@@ -162,28 +244,60 @@ p {
 .upload {
     display: flex;
     justify-content: center;
-    
 }
 
 .upload .form-group {
     flex: 0 0 48%;
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
 }
 
-/* skills */
-
+/* Skills */
 .skills {
     display: flex;
     align-items: center;
 }
 
 .skills input[type="text"] {
-    flex: 1; 
-    margin-right: 10px; 
+    flex: 1;
+    margin-right: 10px;
 }
 
 .single-skill {
     margin-right: 5px;
+}
+
+/* Job */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.job-content ul li {
+    margin: 5px 0;
+}
+
+.job-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button:hover {
+    background-color: #0056b3;
 }

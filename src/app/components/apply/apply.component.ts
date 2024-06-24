@@ -4,6 +4,7 @@ import { MessageService } from 'primeng/api';
 import { Application } from 'src/app/Interface/Application';
 import { ApplicationService } from 'src/app/services/application.service';
 import { JobService } from 'src/app/services/job.service';
+import { Job } from '../job-item/interface/Job';
 
 @Component({
   selector: 'app-apply',
@@ -15,7 +16,7 @@ import { JobService } from 'src/app/services/job.service';
 export class ApplyComponent implements OnInit {
 
   @Input() jobId: number = 0;
-  constructor(private applicationService: ApplicationService, private AcRouter: ActivatedRoute, private router: Router, private messageService: MessageService) { }
+  constructor(private jobService: JobService, private applicationService: ApplicationService, private AcRouter: ActivatedRoute, private router: Router, private messageService: MessageService) { }
 
 
 
@@ -44,8 +45,23 @@ export class ApplyComponent implements OnInit {
     bscAdmissionYear: new Date().getFullYear(),
     mscGraduationYear: new Date().getFullYear(),
     mscAdmissionYear: new Date().getFullYear(),
-    skills: []
+    skills: [],
+    applicationId: 0
   };
+
+  job: Job = {
+    jobId: 0,
+    jobName: '',
+    location: '',
+    salary: 0,
+    publishDate: '',
+    description: '',
+    requirements: [],
+    responsibilities: [],
+    maximumApplication: 0,
+    acceptingResponse: false,
+    jobApplications: []
+  }
 
 
   uploadedFiles: any[] = [];
@@ -53,7 +69,14 @@ export class ApplyComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.AcRouter.queryParams.subscribe((params: any) => this.jobId = params.jobId)
+    this.AcRouter.queryParams.subscribe((params: any) => {
+      this.jobId = params.jobId
+      this.jobService.getJobByID(this.jobId).subscribe(job => {
+        this.job = job
+        this.application.applicationId = this.job.jobId
+      })
+    }
+    )
   }
 
   addSkill() {
@@ -180,7 +203,8 @@ export class ApplyComponent implements OnInit {
       bscAdmissionYear: new Date().getFullYear(),
       mscGraduationYear: new Date().getFullYear(),
       mscAdmissionYear: new Date().getFullYear(),
-      skills: []
+      skills: [],
+      applicationId: this.jobId
     }
     this.messageService.add({ key: 'tc', severity: 'info', summary: 'Fileds Cleared', detail: 'All data fileds are cleared' });
   }

@@ -33,7 +33,8 @@ export class ViewApplicationsComponent implements OnInit {
     mscUniversity: '',
     mscDepartment: '',
     mscCGPA: 0,
-    skills: []
+    skills: [],
+    applicationId: 0
   }
   showAppDetails: boolean = false
 

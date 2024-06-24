@@ -1,13 +1,15 @@
 <app-admin-nav (back)="goBack()"></app-admin-nav>
 
 <form class="update-job-form form-font">
+    <div class="title">Update Job</div>
     <div class="form-group">
         <label for="jobName" class="form-label">Job Name</label>
         <input type="text" id="jobName" name="jobName" [(ngModel)]="job.jobName" class="form-input" required>
     </div>
     <div class="form-group">
         <label for="location" class="form-label">Location</label>
-        <input type="text" id="location" name="location" [(ngModel)]="job.location" class="form-input" required>
+        <!-- <input type="text" id="location" name="location" [(ngModel)]="job.location" class="form-input" required> -->
+        <p-dropdown name="location" [options]="locations" [(ngModel)]="job.location"></p-dropdown>
     </div>
     <div class="form-group">
         <label for="salary" class="form-label">Salary</label>
@@ -41,10 +43,10 @@
     </div>
     <div class="form-group">
         <label for="acceptingResponse" class="form-label">Accepting Response</label>
-        <td><p-inputSwitch [(ngModel)]="job.acceptingResponse"></p-inputSwitch>
+        <td><p-inputSwitch name="toogleResponse" [(ngModel)]="job.acceptingResponse"></p-inputSwitch>
     </div>
 
-    <button pButton pRipple type="button" label="Update" class="p-button-rounded p-button-rounded p-button-info"
+    <button pButton pRipple name="update" type="button" label="Update" class="p-button-rounded p-button-rounded p-button-info"
         [style]="{'width' : '100%'}" (click)="updateJob()"></button>
 
 </form>

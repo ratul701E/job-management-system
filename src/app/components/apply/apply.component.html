@@ -3,20 +3,34 @@
         <app-apply-nav (back)="goBack()" (showJobInfo)="showJobDetails()"></app-apply-nav>
     </div>
 
-    <div>
-        <div class="job-information">
-            <p-dialog header="Job Information" [(visible)]="showJob" [style]="{width: '50vw'}">
-                <app-job-item [jobId]="this.jobId" [isButtonVisible]="false"></app-job-item>
-                <ng-template pTemplate="footer">
-                    <p-button icon="pi pi-times" (click)="showJob=false" label="Close"
-                        styleClass="p-button-text"></p-button>
-                </ng-template>
-            </p-dialog>
+    <div class="job-form-and-details">
+        <div class="job-detail-container">
+            <div class="title">Job Information</div>
+            <div class="job-card">
+                <div class="job-header">
+                    <img alt="Job Image" class="job-logo" src="../../../assets/aiub.png">
+                    <h2>{{ job.jobName }}</h2>
+                    <h4>Published: {{ job.publishDate }}</h4>
+                </div>
+                <div class="job-content">
+                    <p><strong>Job Location:</strong> {{ job.location }}</p>
+                    <p><strong>Salary:</strong> ${{ job.salary }}</p>
+                    <p><strong>Description:</strong> <br> {{ job.description }}</p>
+                    <p><strong>Requirements:</strong></p>
+                    <ul>
+                        <li *ngFor="let req of job.requirements">{{ req }}</li>
+                    </ul>
+                    <p><strong>Responsibilities:</strong></p>
+                    <ul>
+                        <li *ngFor="let res of job.responsibilities">{{ res }}</li>
+                    </ul>
+                    <p><strong>Remaining Application Slots:</strong> {{ job.maximumApplication }}</p>
+                </div>
+            </div>
         </div>
 
-        <div class="title">Application Form</div>
-
         <div class="form-container">
+            <div class="title">Application Form</div>
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="p-inputtext-sm" pInputText id="name" [(ngModel)]="application.name"
@@ -157,11 +171,12 @@
                 </div>
             </div>
 
-            <button pButton pRipple type="button" label="Clear Fields" class="p-button-outlined p-button-rounded p-button-danger"
-                [style]="{'margin-bottom': '.5em', 'width' : '100%'}" (click)="clear()"></button>
-            <button pButton pRipple type="button" label="Apply" class="p-button-outlined p-button-rounded p-button-help"
-                [style]="{'width' : '100%'}" (click)="handleApply()"></button>
-            
+            <button pButton pRipple type="button" label="Clear Fields" class="p-button-outlined p-button-rounded p-button-warning"
+                style="margin-right: 10px;" (click)="clear()"></button>
+                <br>
+            <button pButton pRipple type="button" label="Submit" class="p-button-outlined p-button-rounded p-button-info"
+                (click)="handleApply()"></button>
+
         </div>
     </div>
 

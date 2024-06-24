@@ -25,11 +25,6 @@ export class ApplyNavComponent implements OnInit {
         command: () => this.onBack()
       },
       {
-        label: 'Job Information',
-        icon: 'pi pi-info-circle',
-        command: () => this.onShowJob()
-      },
-      {
         label: 'Login',
         icon: 'pi pi-sign-in',
         command: () => this.router.navigate(['/login'])

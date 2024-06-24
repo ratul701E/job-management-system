@@ -24,12 +24,20 @@ export class UpdateOpeningComponent implements OnInit {
     responsibilities: [],
     maximumApplication: 0,
     acceptingResponse: false,
+    jobApplications: []
   }
 
   formattedRequirements: string = ''
   formattedResponsibilities: string = ''
-
-  constructor(private jobService: JobService, private router: Router, private AcRouter: ActivatedRoute, private confirmationService: ConfirmationService, private messageService: MessageService) { }
+  locations: string[] = []
+  constructor(private jobService: JobService, private router: Router, private AcRouter: ActivatedRoute, private confirmationService: ConfirmationService, private messageService: MessageService) {
+    this.locations = [
+      'Dhaka',
+      'Cumilla',
+      'Chattogram',
+      'Khulna'
+]
+   }
 
   ngOnInit(): void {
     this.AcRouter.queryParams.subscribe((params: any) => this.jobId = params.jobId)
@@ -37,6 +45,8 @@ export class UpdateOpeningComponent implements OnInit {
       this.job = job
       this.formattedRequirements = this.job.requirements.join('\n');
       this.formattedResponsibilities = this.job.responsibilities.join('\n');
+
+      console.log(this.job)
     })
   }
 
