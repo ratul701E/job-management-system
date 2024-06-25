@@ -24,7 +24,9 @@ export class UpdateOpeningComponent implements OnInit {
     responsibilities: [],
     maximumApplication: 0,
     acceptingResponse: false,
-    jobApplications: []
+    jobApplications: [],
+    alreadyApplied: 0,
+    isNegotiable: false
   }
 
   formattedRequirements: string = ''

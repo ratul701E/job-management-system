@@ -60,7 +60,9 @@ export class ApplyComponent implements OnInit {
     responsibilities: [],
     maximumApplication: 0,
     acceptingResponse: false,
-    jobApplications: []
+    jobApplications: [],
+    alreadyApplied: 0,
+    isNegotiable: false
   }
 
 
@@ -72,11 +74,16 @@ export class ApplyComponent implements OnInit {
     this.AcRouter.queryParams.subscribe((params: any) => {
       this.jobId = params.jobId
       this.jobService.getJobByID(this.jobId).subscribe(job => {
+        if(job.alreadyApplied === job.maximumApplication) this.dismiss()
         this.job = job
         this.application.applicationId = this.job.jobId
       })
     }
     )
+  }
+
+  dismiss() {
+    this.router.navigate(['/jobs'])
   }
 
   addSkill() {

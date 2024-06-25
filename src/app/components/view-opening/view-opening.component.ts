@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Application } from 'src/app/Interface/Application';
 import { ApplicationService } from 'src/app/services/application.service';
 import { JobService } from 'src/app/services/job.service';
 import { Job } from '../job-item/interface/Job';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 @Component({
   selector: 'app-view-opening',
   templateUrl: './view-opening.componentv2.html',
   styleUrls: ['./view-opening.component.css'],
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService]
 
 })
 export class ViewOpeningComponent implements OnInit {
@@ -21,7 +21,7 @@ export class ViewOpeningComponent implements OnInit {
   displayBasic: boolean = false
   check: boolean = true
   loading: boolean = true
-  constructor( private messageService: MessageService, private jobService: JobService, private router: Router) { }
+  constructor( private messageService: MessageService, private jobService: JobService, private router: Router, private confirmationService: ConfirmationService) { }
 
 
   ngOnInit(): void {
@@ -58,6 +58,8 @@ export class ViewOpeningComponent implements OnInit {
     this.showDialog(false)
   }
 
+
+
   deleteJob() {
     if(this.job == undefined) {
       this.messageService.add({ key: 'tc', severity: 'warn', summary: 'Failed To Remove', detail: 'Unknown error occured' });
@@ -65,11 +67,28 @@ export class ViewOpeningComponent implements OnInit {
 
     if(this.job.jobApplications.length > 0) {
       this.messageService.add({ key: 'tc', severity: 'error', summary: 'Failed To Remove', detail: `The job have ${this.job.jobApplications.length} application(s)` });
+      return
     }
 
-    //now delete the job
+    this.confirmationService.confirm({
+      message: `Opening <b>\"${this.job.jobName} (id: ${this.job.jobId})\"</b> will be removed permanently `,
+      accept: () => {
+          this.handleDelete()
+      }
+  });
+    
+  }
 
-    this.showDialog(false)
+  private handleDelete() {
+    this.jobService.removeJob(this.job.jobId).subscribe(isErr => {
+      if(!isErr) {
+        this.jobs = this.jobs.filter((value) => this.job.jobId != value.jobId)
+        this.messageService.add({ key: 'tc', severity: 'success', summary: 'Openings Removed', detail: `The job is removed successfully` });
+      }
+      else this.messageService.add({ key: 'tc', severity: 'error', summary: 'Failed To Remove', detail: `The job have ${this.job.jobApplications.length} application(s)` });
+    
+      this.showDialog(false)
+    })
   }
 
 
@@ -85,7 +104,9 @@ export class ViewOpeningComponent implements OnInit {
       responsibilities: [],
       maximumApplication: 0,
       acceptingResponse: false,
-      jobApplications: []
+      jobApplications: [],
+      alreadyApplied: 0,
+      isNegotiable: false
     }
     return emptyJob
   }

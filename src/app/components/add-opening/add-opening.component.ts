@@ -27,7 +27,9 @@ export class AddOpeningComponent {
     responsibilities: [],
     maximumApplication: 0,
     acceptingResponse: true,
-    jobApplications: []
+    jobApplications: [],
+    alreadyApplied: 0,
+    isNegotiable: true
   }
 
   locations: string[] = []

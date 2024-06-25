@@ -97,4 +97,15 @@
     </ng-template>
 </p-dialog>
 
+<!-- toast -->
 <p-toast position="top-center" key="tc"></p-toast>
+<!-- confirmation -->
+<p-confirmDialog #cd [style]="{width: '30vw'}">
+    <ng-template pTemplate="header">
+        <h3>Are You Sure?</h3>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button class="p-button-raised p-button-warning" type="button" pButton icon="pi pi-times" label="Cancel" (click)="cd.reject()"></button>
+        <button class="p-button-raised p-button-danger" type="button" pButton icon="pi pi-trash" label="Delete" (click)="cd.accept()"></button>
+    </ng-template>
+</p-confirmDialog>

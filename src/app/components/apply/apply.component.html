@@ -14,7 +14,7 @@
                 </div>
                 <div class="job-content">
                     <p><strong>Job Location:</strong> {{ job.location }}</p>
-                    <p><strong>Salary:</strong> ${{ job.salary }}</p>
+                    <p><strong>Salary:</strong> ${{ job.salary }} <span *ngIf="job.isNegotiable">(Negotiable)</span></p>
                     <p><strong>Description:</strong> <br> {{ job.description }}</p>
                     <p><strong>Requirements:</strong></p>
                     <ul>

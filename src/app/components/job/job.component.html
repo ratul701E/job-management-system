@@ -7,13 +7,15 @@
 <div class="container">
     <div class="card" *ngFor="let job of jobs">
         <p-card [header]="'#' + job.jobId + ' ' + job.jobName" [subheader]="'Publised: ' + job.publishDate" [style]="{width: '360px'}"
-            styleClass="p-card-shadow">
+            styleClass="p-card-shadow" >
             <ng-template pTemplate="header">
                 <img alt="Card" class="job-logo" src="../../../assets/aiub.png">
             </ng-template>
             <p>
+                <b>Applied: </b> {{ job.alreadyApplied }}/{{job.maximumApplication}}<br>
+                <b>Remaining: </b> {{job.maximumApplication - job.alreadyApplied}} <br><br>
                 <b>Job Location: </b> {{job.location}} <br>
-                <b>Salary: </b> {{job.salary}} <br>
+                <b>Salary: </b> {{job.salary}} <span *ngIf="job.isNegotiable">(Negotiable)</span> <br>
                 <b>Description: </b> {{job.description}} <br>
                 <b>Requirements: </b> <br>
             <ul>
@@ -23,11 +25,19 @@
             <ul>
                 <li *ngFor="let res of job.responsibilities">{{res}}</li>
             </ul>
-            <b>Remaining Application Slots: </b> {{job.maximumApplication}} <br>
             <ng-template pTemplate="footer">
                 <button pButton pRipple type="button" label="View" class="p-button-outlined p-button-rounded" (click)="goToJob(job.jobId)"></button>
-                <button pButton pRipple type="button" label="Apply"
+                
+                <span *ngIf="this.job.alreadyApplied === this.job.maximumApplication">
+                    <button pButton pRipple type="button" label="Full" [disabled]="true" class="p-button-outlined p-button-rounded p-button-secondary" [style]="{'margin-left': '.5em'}"></button>
+                </span>
+
+                <span *ngIf="this.job.alreadyApplied !== this.job.maximumApplication">
+                    <button pButton pRipple type="button" label="Apply"
                     class="p-button-outlined p-button-rounded p-button-help" [style]="{'margin-left': '.5em'}" (click)="apply(job.jobId)"></button>
+                </span>
+                
+                
 
             </ng-template>
         </p-card>

@@ -9,15 +9,10 @@ const httpOptions = {
   })
 }
 
-export interface ApiResponseJobs {
+export interface ApiResponseJob<T> {
   isError: boolean;
   messages: string[];
-  data: Job[];
-}
-export interface ApiResponseJob {
-  isError: boolean;
-  messages: string[];
-  data: Job;
+  data: T;
 }
 
 @Injectable({
@@ -30,13 +25,13 @@ export class JobService {
   }
 
   getAllJobs(): Observable<Job[]> {
-    return this.http.get<ApiResponseJobs>(this.url, httpOptions).pipe(
+    return this.http.get<ApiResponseJob<Job[]>>(this.url, httpOptions).pipe(
       map(response => response.data)
     );
   }
 
   getJobByID(jobId: number): Observable<Job> {
-    return this.http.get<ApiResponseJob>(`${this.url}/${jobId}`, httpOptions).pipe(
+    return this.http.get<ApiResponseJob<Job>>(`${this.url}/${jobId}`, httpOptions).pipe(
       map(response => {
         return response.data
       })
@@ -44,16 +39,25 @@ export class JobService {
   }
 
   updateJob(jobId: number, job: Job): Observable<Job> {
-    return this.http.patch<ApiResponseJob>(this.url + `/${jobId}`, job, httpOptions).pipe(
+    return this.http.patch<ApiResponseJob<Job>>(this.url + `/${jobId}`, job, httpOptions).pipe(
       map(response => {
         return response.data
       })
     )
   }
   addJob(jobId: number, job: Job): Observable<Job> {
-    return this.http.post<ApiResponseJob>(this.url, job, httpOptions).pipe(
+    return this.http.post<ApiResponseJob<Job>>(this.url, job, httpOptions).pipe(
       map(response => {
         return response.data
+      })
+    )
+  }
+  
+  removeJob(jobId: number): Observable<boolean> {
+    return this.http.delete<ApiResponseJob<boolean>>(this.url + `/${jobId}`, httpOptions).pipe(
+      map(response => {
+        //console.log(response.isError)
+        return response.isError
       })
     )
   }
