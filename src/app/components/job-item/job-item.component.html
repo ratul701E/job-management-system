@@ -1,3 +1,5 @@
+<app-apply-nav (back)="goBack()"></app-apply-nav>
+
 <div class="job-detail-container">
     <div class="job-card">
         <div class="job-header">
@@ -22,16 +24,16 @@
             <p><strong>Remaining Application Slots:</strong> {{ job.maximumApplication }}</p>
         </div>
         <div class="job-footer" *ngIf="isButtonVisible">
-            <button pButton pRipple type="button" label="Back" class="p-button-outlined p-button-rounded  p-button-danger" (click)="goBack()"></button>
+            <button pButton pRipple type="button" label="Back" class="p-button-warning" (click)="goBack()"></button>
             
             <span *ngIf="this.job.alreadyApplied === this.job.maximumApplication">
                 <button pButton pRipple type="button" label="Full" [disabled]="true"
-                    class="p-button-outlined p-button-rounded p-button-secondary" [style]="{'margin-left': '.5em'}" (click)="apply(job.jobId)"></button>
+                    class="p-button-danger" [style]="{'margin-left': '.5em'}" (click)="apply(job.jobId)"></button>
             </span>
 
             <span *ngIf="this.job.alreadyApplied !== this.job.maximumApplication">
                 <button pButton pRipple type="button" label="Apply"
-                    class="p-button-outlined p-button-rounded p-button-help" [style]="{'margin-left': '.5em'}" (click)="apply(job.jobId)"></button>
+                    class="p-button-success" [style]="{'margin-left': '.5em'}" (click)="apply(job.jobId)"></button>
             </span>
             
             
