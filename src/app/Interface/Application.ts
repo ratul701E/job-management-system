@@ -20,4 +20,5 @@ export interface Application {
     mscGraduationYear?: number;
     mscAdmissionYear?: number;
     skills: string[];
+    expectedSalary?: number
 }

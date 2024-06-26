@@ -12,6 +12,14 @@
     <h3 class="title">Applications (Total {{applications.length}}) </h3>
     <p-table [value]="applications" selectionMode="single" [(selection)]="selectedApplication" dataKey="id"
         responsiveLayout="scroll" (onRowSelect)="onSelect()" (onRowUnselect)="onUnselect()" class="custom-table">
+
+        <ng-template pTemplate="caption">
+            <div class="flex">
+                <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                    class="p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom">&nbsp;Download</button>
+            </div>
+        </ng-template>
+
         <ng-template pTemplate="header">
             <tr>
                 <th class="table-header">ID</th>
@@ -32,14 +40,32 @@
                 <td>{{application.phone}}</td>
                 <td>{{application.dob}}</td>
                 <td>{{application.email}}</td>
-                <td>{{application.isAiubian}}</td>
+                <td>
+                    <ng-container *ngIf="application.isAiubian else notAiubian">
+                        <p-tag [style]="{'background' : '#16A34A'}" value="Yes"></p-tag>
+                    </ng-container>
+                    <ng-template #notAiubian>
+                        <p-tag [style]="{'background' : '#FF5555'}" value="No"></p-tag>
+                    </ng-template>
+                </td>
                 <td>{{application.bscUniversity}}</td>
-                <td [style.color]="application.isBscCompleted ? 'green' : 'red'">
-                    {{ application.isBscCompleted ? 'Completed' : 'Incomplete' }}
+                <td>
+                    <ng-container *ngIf="application.isBscCompleted; else bscIncomplete">
+                        <p-tag [style]="{'background' : '#16A34A'}" value="Completed"></p-tag>
+                    </ng-container>
+                    <ng-template #bscIncomplete>
+                        <p-tag [style]="{'background' : '#FF5555'}" value="Incomplete"></p-tag>
+                    </ng-template>
                 </td>
-                <td [style.color]="application.isMscCompleted ? 'green' : 'red'">
-                    {{ application.isMscCompleted ? 'Completed' : 'Incomplete' }}
+                <td>
+                    <ng-container *ngIf="application.isMscCompleted; else mscIncomplete">
+                        <p-tag [style]="{'background' : '#16A34A'}" value="Completed"></p-tag>
+                    </ng-container>
+                    <ng-template #mscIncomplete>
+                        <p-tag [style]="{'background' : '#FF5555'}" value="Incomplete"></p-tag>
+                    </ng-template>
                 </td>
+
 
             </tr>
         </ng-template>
@@ -52,8 +78,10 @@
     <div class="application-details">
         <h1>Application ID: {{selectedApplication.id}}</h1>
         <div class="detail-group">
-            <button icon="pi pi-book" pButton pRipple type="button" label="View CV" class="p-button-outlined p-button-rounded p-button-info"></button>
-            <button icon="pi pi-file" pButton pRipple type="button" label="View Cover Letter" class="p-button-outlined p-button-rounded p-button-help"></button>
+            <button icon="pi pi-book" pButton pRipple type="button" label="View CV"
+                class="p-button-outlined p-button-rounded p-button-info"></button>
+            <button icon="pi pi-file" pButton pRipple type="button" label="View Cover Letter"
+                class="p-button-outlined p-button-rounded p-button-help"></button>
         </div>
         <div class="detail-group">
             <label>Name:</label>
@@ -62,6 +90,10 @@
         <div class="detail-group">
             <label>Email:</label>
             <span>{{selectedApplication.email}}</span>
+        </div>
+        <div class="detail-group">
+            <label>Expected Salary</label>
+            <span>{{selectedApplication.expectedSalary}}</span>
         </div>
         <div class="detail-group">
             <label>Phone:</label>
@@ -117,16 +149,21 @@
         </div>
         <div class="detail-group">
             <label>Skills:</label>
-            <span>{{selectedApplication.skills.join(', ')}}</span>
-        </div>
+            <span *ngFor="let skill of selectedApplication.skills">
+                <p-tag [style]="{'background' : '#55b7cf'}" [value]="skill"></p-tag>
+            </span>
+        </div>        
         <div class="detail-group">
-            <button icon="pi pi-book" pButton pRipple type="button" label="View CV" class="p-button-outlined p-button-rounded p-button-info"></button>
-            <button icon="pi pi-file" pButton pRipple type="button" label="View Cover Letter" class="p-button-outlined p-button-rounded p-button-help"></button>
+            <button icon="pi pi-book" pButton pRipple type="button" label="View CV"
+                class="p-button-outlined p-button-rounded p-button-info"></button>
+            <button icon="pi pi-file" pButton pRipple type="button" label="View Cover Letter"
+                class="p-button-outlined p-button-rounded p-button-help"></button>
         </div>
     </div>
 
     <ng-template pTemplate="footer">
         <br>
-        <button icon="pi pi-times" (click)="showAppDetails=false" pButton pRipple type="button" label="Close" class="p-button-outlined p-button-rounded p-button-info"></button>
+        <button icon="pi pi-times" (click)="showAppDetails=false" pButton pRipple type="button" label="Close"
+            class="p-button-outlined p-button-rounded p-button-info"></button>
     </ng-template>
 </p-dialog>

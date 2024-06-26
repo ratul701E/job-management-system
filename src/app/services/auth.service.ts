@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { SigninDto } from '../Interface/SigninDto';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, map, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -20,7 +21,7 @@ export interface ApiResponseSignin {
   providedIn: 'root'
 })
 export class AuthService {
-  private url = "https://localhost:7186/api/auth/signin"
+  private url = environment.API_ENDPOINT + "/auth/signin"
   constructor(private http: HttpClient) { }
   private readonly tokenKey: string = "JwtAccessToken"
 

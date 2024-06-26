@@ -55,6 +55,12 @@
                     name="email" required />
             </div>
 
+            <div class="form-group" *ngIf="job.isNegotiable">
+                <label for="expected-salary">Expected Salary</label>
+                <input type="number" class="p-inputtext-sm" pInputText id="expected-salary" [(ngModel)]="application.expectedSalary"
+                    name="email" required />
+            </div>
+
             <div class="form-group">
                 <label for="isAiubian">Are you an AIUBian?</label>
                 <input type="checkbox" id="isAiubian" (change)="toggleIsAiubian()" name="isAiubian" />

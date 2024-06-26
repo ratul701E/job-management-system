@@ -14,6 +14,8 @@
     <div class="form-group">
         <label for="salary" class="form-label">Salary</label>
         <input type="number" id="salary" name="salary" [(ngModel)]="job.salary" class="form-input" required>
+        <label for="negotiable" class="form-label">Negotiable?</label>
+        <p-inputSwitch name="negotiable"  [(ngModel)]="this.job.isNegotiable"/>
     </div>
     <div class="form-group">
         <label for="publishDate" class="form-label">Publish Date</label>

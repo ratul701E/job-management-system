@@ -184,9 +184,13 @@ export class ApplyComponent implements OnInit {
     this.application.dob = this.formatDate(new Date(this.application.dob))
     console.log(this.application)
 
-    this.applicationService.postApplication(this.application).subscribe(err => this.submitResult = !err)
-    //chk
-    this.messageService.add({ key: 'tc', severity: 'success', summary: 'Congratulation', detail: 'Application is submitted successfully' });
+    this.applicationService.postApplication(this.application).subscribe(err => {
+      if(err) {
+        this.messageService.add({ key: 'tc', severity: 'error', summary: 'Failed', detail: 'An applicaiton with this email is exist.' });
+      }
+      else this.messageService.add({ key: 'tc', severity: 'success', summary: 'Congratulation', detail: 'Application is submitted successfully' });
+    })
+
   }
 
   clear() {

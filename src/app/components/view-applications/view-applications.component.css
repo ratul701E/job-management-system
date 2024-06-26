@@ -74,7 +74,7 @@
   }
   
   .detail-group span {
-    flex: 2;
+    margin-left: 2px;
     text-align: right;
     font-size: 1em;
     color: #333;

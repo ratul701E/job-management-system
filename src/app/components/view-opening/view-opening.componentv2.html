@@ -45,7 +45,7 @@
                 <td>{{ job.publishDate }}</td>
                 <td>{{ job.maximumApplication }}</td>
                 <td>
-                    <p-inputSwitch [(ngModel)]="job.acceptingResponse"></p-inputSwitch>
+                    <p-inputSwitch [disabled]="true" [(ngModel)]="job.acceptingResponse"></p-inputSwitch>
                 </td>
             </tr>
         </ng-template>
@@ -61,21 +61,25 @@
 
 
 <!-- Dialog -->
-<p-dialog header="{{'#' + job?.jobId + ' ' + job?.jobName }}" [(visible)]="displayBasic" [draggable]="false"
+<p-dialog header="{{'#' + job.jobId + ' ' + job.jobName }}" [(visible)]="displayBasic" [draggable]="false"
     [style]="{ 'max-width': '600px' }" class="job-dialog">
     <div class="dialog-content">
         <div class="job-details">
             <div class="job-detail">
                 <span class="detail-label">Job ID:</span>
-                <span class="detail-value">{{ job?.jobId }}</span>
+                <span class="detail-value">{{ job.jobId }}</span>
             </div>
             <div class="job-detail">
                 <span class="detail-label">Published Date:</span>
-                <span class="detail-value">{{ job?.publishDate }}</span>
+                <span class="detail-value">{{ job.publishDate }}</span>
             </div>
             <div class="job-detail">
                 <span class="detail-label">Salary:</span>
-                <span class="detail-value">{{ job?.salary }}</span>
+                <span class="detail-value">{{ job.salary }}</span>
+            </div>
+            <div class="job-detail">
+                <span class="detail-label">Applicant:</span>
+                <span class="detail-value">{{ job.jobApplications.length }}</span>
             </div>
         </div>
     </div>

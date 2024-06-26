@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable, map } from 'rxjs';
 import { Job } from '../components/job-item/interface/Job';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,7 +20,7 @@ export interface ApiResponseJob<T> {
   providedIn: 'root'
 })
 export class JobService {
-  private url = "https://localhost:7186/api/jobs"
+  private url = environment.API_ENDPOINT + "/jobs"
   constructor(private http: HttpClient) {
 
   }
@@ -38,10 +39,10 @@ export class JobService {
     );
   }
 
-  updateJob(jobId: number, job: Job): Observable<Job> {
+  updateJob(jobId: number, job: Job): Observable<boolean> {
     return this.http.patch<ApiResponseJob<Job>>(this.url + `/${jobId}`, job, httpOptions).pipe(
       map(response => {
-        return response.data
+        return response.isError
       })
     )
   }

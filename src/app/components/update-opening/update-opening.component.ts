@@ -65,8 +65,13 @@ export class UpdateOpeningComponent implements OnInit {
     this.job.requirements = this.formattedRequirements.split('\n')
     this.job.responsibilities = this.formattedResponsibilities.split('\n')
     console.log(this.job)
-    this.jobService.updateJob(this.job.jobId, this.job).subscribe(result => {})
-    this.messageService.add({ key: 'tc', severity: 'success', summary: 'Updated', detail: 'Openings Updated Successfully' });
+    this.jobService.updateJob(this.job.jobId, this.job).subscribe(result => {
+      if(result) {
+        this.messageService.add({ key: 'tc', severity: 'error', summary: 'Failed', detail: 'Cannot set lower value than applicant count' });
+      }
+      else this.messageService.add({ key: 'tc', severity: 'success', summary: 'Updated', detail: 'Openings Updated Successfully' });
+    })
+    
 
   }
 

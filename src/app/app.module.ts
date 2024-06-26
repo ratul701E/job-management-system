@@ -17,8 +17,7 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import { CheckboxModule } from 'primeng/checkbox';
 import {StyleClassModule} from 'primeng/styleclass';
 import {DropdownModule} from 'primeng/dropdown';
-
-
+import { TagModule } from 'primeng/tag';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -80,6 +79,7 @@ import { AuthService } from './services/auth.service';
     PasswordModule,
     RippleModule,
     DropdownModule,
+    TagModule,
   ],
   providers: [
     AuthService,

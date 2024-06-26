@@ -15,7 +15,10 @@ export class JobComponent implements OnInit {
 
   ngOnInit(): void {
     this.jobService.getAllJobs().subscribe(jobs => {
-      this.jobs = jobs
+      this.jobs = jobs.filter(job => {
+        if(!job.acceptingResponse || job.alreadyApplied === job.maximumApplication) return false
+        return job
+      })
       console.log(jobs)
     })
 
