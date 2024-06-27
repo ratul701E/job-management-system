@@ -26,7 +26,8 @@ export class UpdateOpeningComponent implements OnInit {
     acceptingResponse: false,
     jobApplications: [],
     alreadyApplied: 0,
-    isNegotiable: false
+    isNegotiable: false,
+    deadline: ''
   }
 
   formattedRequirements: string = ''

@@ -13,7 +13,8 @@
             </ng-template>
             <p>
                 <b>Applied: </b> {{ job.alreadyApplied }}/{{job.maximumApplication}}<br>
-                <b>Remaining: </b> {{job.maximumApplication - job.alreadyApplied}} <br><br>
+                <b>Remaining: </b> {{job.maximumApplication - job.alreadyApplied}} <br>
+                <b>Deadline: </b> {{job.deadline}} <br><br>
                 <b>Job Location: </b> {{job.location}} <br>
                 <b>Salary: </b> {{job.salary}} <span *ngIf="job.isNegotiable"><b>(Negotiable)</b></span> <br>
                 <b>Description: </b> {{job.description}} <br>

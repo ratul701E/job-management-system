@@ -38,7 +38,11 @@ export class ViewApplicationsComponent implements OnInit {
     mscCGPA: 0,
     skills: [],
     applicationId: 0,
-    expectedSalary: 0
+    expectedSalary: 0,
+    bscGraduationYear: 0,
+    bscAdmissionYear: 0,
+    mscGraduationYear: 0,
+    mscAdmissionYear: 0
   }
   showAppDetails: boolean = false
 

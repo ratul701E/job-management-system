@@ -94,20 +94,21 @@ export class ViewOpeningComponent implements OnInit {
 
   private getEmptyJob(): Job{
      let emptyJob: Job = {
-      jobId: 0,
-      jobName: '',
-      location: '',
-      salary: 0,
-      publishDate: '',
-      description: '',
-      requirements: [],
-      responsibilities: [],
-      maximumApplication: 0,
-      acceptingResponse: false,
-      jobApplications: [],
-      alreadyApplied: 0,
-      isNegotiable: false
-    }
+       jobId: 0,
+       jobName: '',
+       location: '',
+       salary: 0,
+       publishDate: '',
+       description: '',
+       requirements: [],
+       responsibilities: [],
+       maximumApplication: 0,
+       acceptingResponse: false,
+       jobApplications: [],
+       alreadyApplied: 0,
+       isNegotiable: false,
+       deadline: ''
+     }
     return emptyJob
   }
 

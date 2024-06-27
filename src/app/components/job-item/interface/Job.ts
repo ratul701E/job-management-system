@@ -6,6 +6,7 @@ export interface Job {
     location: string
     salary: number
     publishDate: string
+    deadline: string
     description: string
     requirements: string[]
     responsibilities: string[]

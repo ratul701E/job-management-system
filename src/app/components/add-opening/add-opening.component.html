@@ -13,6 +13,16 @@
 
     </div>
     <div class="form-group">
+        <label for="publishDate" class="form-label">Publish Date</label>
+        <input type="text" id="publishDate" name="publishDate" [(ngModel)]="job.publishDate" class="form-input"
+            required>
+    </div>
+    <div class="form-group">
+        <label for="dealdine" class="form-label">Deadline</label>
+        <input type="text" id="dealdine" name="dealdine" [(ngModel)]="job.deadline" class="form-input"
+            required>
+    </div>
+    <div class="form-group">
         <label for="salary" class="form-label">Salary</label>
         <input type="number" id="salary" name="salary" [(ngModel)]="job.salary" class="form-input" required> <br>
         <label for="negotiable" class="form-label">Negotiable?</label>

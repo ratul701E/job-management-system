@@ -23,6 +23,11 @@
             required>
     </div>
     <div class="form-group">
+        <label for="dealdine" class="form-label">Deadline</label>
+        <input type="text" id="dealdine" name="dealdine" [(ngModel)]="job.deadline" class="form-input"
+            required>
+    </div>
+    <div class="form-group">
         <label for="description" class="form-label">Description</label>
         <textarea id="description" name="description" [(ngModel)]="job.description" class="form-textarea"
             rows="4"></textarea>

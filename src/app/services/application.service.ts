@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    "Content-Type" : "application/json",
+    "Content-Type" : "multipart/form-data",
   }),
 }
 
@@ -25,8 +25,8 @@ export class ApplicationService {
 
   }
 
-  postApplication(application: Application) : Observable<boolean> {
-    return this.http.post<ApiResponseApplication<boolean>>(this.url, application, httpOptions).pipe(
+  postApplication(application: FormData) : Observable<boolean> {
+    return this.http.post<ApiResponseApplication<boolean>>(this.url, application).pipe(
       map(response => {
         return response.isError
       })

@@ -11,19 +11,21 @@ import { Job } from '../job-item/interface/Job';
   templateUrl: './apply.component.html',
   styleUrls: ['./apply.component.css'],
   providers: [MessageService]
-
 })
 export class ApplyComponent implements OnInit {
-
   @Input() jobId: number = 0;
-  constructor(private jobService: JobService, private applicationService: ApplicationService, private AcRouter: ActivatedRoute, private router: Router, private messageService: MessageService) { }
+  constructor(
+    private jobService: JobService,
+    private applicationService: ApplicationService,
+    private AcRouter: ActivatedRoute,
+    private router: Router,
+    private messageService: MessageService
+  ) {}
 
-
-
-  isMSC = false
-  showJob = false
-  skill: string = ''
-  submitResult: boolean = false
+  isMSC = false;
+  showJob = false;
+  skill: string = '';
+  submitResult: boolean = false;
 
   application: Application = {
     id: 0,
@@ -62,69 +64,81 @@ export class ApplyComponent implements OnInit {
     acceptingResponse: false,
     jobApplications: [],
     alreadyApplied: 0,
-    isNegotiable: false
-  }
+    isNegotiable: false,
+    deadline: ''
+  };
 
-
-  uploadedFiles: any[] = [];
-
-
+  uploadedFiles: any = {
+    cv: null,
+    coverLetter: null
+  };
 
   ngOnInit(): void {
     this.AcRouter.queryParams.subscribe((params: any) => {
-      this.jobId = params.jobId
-      this.jobService.getJobByID(this.jobId).subscribe(job => {
-        if(job.alreadyApplied === job.maximumApplication) this.dismiss()
-        this.job = job
-        this.application.applicationId = this.job.jobId
-      })
-    }
-    )
+      this.jobId = params.jobId;
+      this.jobService.getJobByID(this.jobId).subscribe((job) => {
+        if (job.alreadyApplied === job.maximumApplication) this.dismiss();
+        this.job = job;
+        this.application.applicationId = this.job.jobId;
+      });
+    });
+  }
+
+  uploadCv(event: any){
+    //console.log("hi")
+    this.uploadedFiles.cv = event.files[0]
+  }
+  uploadCoverLetter(event: any){
+    //console.log("hi")
+    this.uploadedFiles.coverLetter = event.files[0]
   }
 
   dismiss() {
-    this.router.navigate(['/jobs'])
+    this.router.navigate(['/jobs']);
   }
 
   addSkill() {
     if (!(this.skill.length > 1)) {
       this.messageService.add({ key: 'tc', severity: 'warn', summary: 'Cannot Added', detail: 'A skill name cannot be empty' });
-      return
+      return;
     }
-    this.application.skills.push(this.skill)
-    this.skill = ''
+    this.application.skills.push(this.skill);
+    this.skill = '';
   }
 
-  onUpload(event: any) {
-    for (let file of event.files) {
-      this.uploadedFiles.push(file);
+  onFileSelect(event: any, fileType: string) {
+    if (event.target.files.length > 0) {
+      this.uploadedFiles[fileType] = event.target.files[0];
     }
   }
 
   showJobDetails() {
-    this.showJob = !this.showJob
+    this.showJob = !this.showJob;
   }
 
   goBack() {
-    this.router.navigate(["/jobs"])
+    this.router.navigate(["/jobs"]);
   }
 
   toggleIsAiubian() {
-    this.application.isAiubian = !this.application.isAiubian
-    if (this.application.isAiubian) this.application.bscUniversity = "American International University Bangladesh"
-    else this.application.bscUniversity = ""
+    this.application.isAiubian = !this.application.isAiubian;
+    if (this.application.isAiubian) {
+      this.application.bscUniversity = "American International University Bangladesh";
+    } else {
+      this.application.bscUniversity = "";
+    }
   }
 
   toggleMsc() {
-    this.isMSC = !this.isMSC
+    this.isMSC = !this.isMSC;
   }
 
   toggleIsBscCompleted() {
-    this.application.isBscCompleted = !this.application.isBscCompleted
+    this.application.isBscCompleted = !this.application.isBscCompleted;
   }
 
   toggleIsMscCompleted() {
-    this.application.isMscCompleted = !this.application.isMscCompleted
+    this.application.isMscCompleted = !this.application.isMscCompleted;
   }
 
   formatDate(date: Date) {
@@ -135,62 +149,86 @@ export class ApplyComponent implements OnInit {
   }
 
   handleApply() {
-    if (!this.application.name || !this.application.email || !this.application.phone || !this.application.dob) {
-      console.log("");
-      this.messageService.add({ key: 'tc', severity: 'warn', summary: 'Filed Error', detail: 'Please fill in all required fields.' });
-      return;
-    }
+    // if (!this.application.name || !this.application.email || !this.application.phone || !this.application.dob) {
+    //   this.messageService.add({ key: 'tc', severity: 'warn', summary: 'Filed Error', detail: 'Please fill in all required fields.' });
+    //   return;
+    // }
 
-    if (this.application.isAiubian && !this.application.aiubId) {
-      console.log("");
-      this.messageService.add({ key: 'tc', severity: 'warn', summary: 'AIUB ID Error', detail: 'Please provide your AIUB Student ID.' });
-      return;
-    }
+    // if (this.application.isAiubian && !this.application.aiubId) {
+    //   this.messageService.add({ key: 'tc', severity: 'warn', summary: 'AIUB ID Error', detail: 'Please provide your AIUB Student ID.' });
+    //   return;
+    // }
 
-    if (!this.application.bscUniversity || !this.application.bscDepartment || !this.application.bscCGPA || (!this.application.bscAdmissionYear && !this.application.bscGraduationYear)) {
-      console.log("");
-      this.messageService.add({ key: 'tc', severity: 'warn', summary: 'BSc Info Error', detail: 'Please provide all BSc information.' });
-      return;
-    }
+    // if (!this.application.bscUniversity || !this.application.bscDepartment || !this.application.bscCGPA || (!this.application.bscAdmissionYear && !this.application.bscGraduationYear)) {
+    //   this.messageService.add({ key: 'tc', severity: 'warn', summary: 'BSc Info Error', detail: 'Please provide all BSc information.' });
+    //   return;
+    // }
 
-    if (this.isMSC && (!this.application.mscUniversity || !this.application.mscDepartment || !this.application.mscCGPA || (!this.application.mscAdmissionYear && !this.application.mscGraduationYear))) {
-      console.log("");
-      this.messageService.add({ key: 'tc', severity: 'warn', summary: 'BSc Info Error', detail: 'Please provide all MSc information.' });
-      return;
-    }
+    // if (this.isMSC && (!this.application.mscUniversity || !this.application.mscDepartment || !this.application.mscCGPA || (!this.application.mscAdmissionYear && !this.application.mscGraduationYear))) {
+    //   this.messageService.add({ key: 'tc', severity: 'warn', summary: 'BSc Info Error', detail: 'Please provide all MSc information.' });
+    //   return;
+    // }
 
     if (!this.isMSC) {
-      this.application.mscUniversity = "";
-      this.application.mscDepartment = "";
+      this.application.mscUniversity = "-";
+      this.application.mscDepartment = "-";
       this.application.mscCGPA = 0;
       this.application.mscAdmissionYear = 0;
       this.application.mscGraduationYear = 0;
     }
 
     if (!this.application.isAiubian) {
-      this.application.aiubId = "";
+      this.application.aiubId = "-";
     }
 
     if (!this.application.isBscCompleted) {
       this.application.bscGraduationYear = 0;
+    } else {
+      this.application.bscAdmissionYear = 0;
     }
-    else this.application.bscAdmissionYear = 0
 
     if (!this.application.isMscCompleted) {
       this.application.mscGraduationYear = 0;
+    } else {
+      this.application.mscAdmissionYear = 0;
     }
-    else this.application.mscAdmissionYear = 0
 
-    this.application.dob = this.formatDate(new Date(this.application.dob))
-    console.log(this.application)
+    this.application.dob = this.formatDate(new Date(this.application.dob));
 
-    this.applicationService.postApplication(this.application).subscribe(err => {
-      if(err) {
-        this.messageService.add({ key: 'tc', severity: 'error', summary: 'Failed', detail: 'An applicaiton with this email is exist.' });
+    const formData = new FormData();
+    formData.append('name', this.application.name.toString());
+    formData.append('email', this.application.email.toString());
+    formData.append('phone', this.application.phone.toString());
+    formData.append('dob', this.application.dob.toString());
+    formData.append('isAiubian', this.application.isAiubian.toString());
+    formData.append('isBscCompleted', this.application.isBscCompleted.toString());
+    formData.append('isMscCompleted', this.application.isMscCompleted.toString());
+    formData.append('aiubId', this.application.aiubId.toString());
+    formData.append('bscUniversity', this.application.bscUniversity.toString());
+    formData.append('bscDepartment', this.application.bscDepartment.toString());
+    formData.append('bscCGPA', this.application.bscCGPA.toString());
+    formData.append('mscUniversity', this.application.mscUniversity.toString());
+    formData.append('mscDepartment', this.application.mscDepartment.toString());
+    formData.append('mscCGPA', this.application.mscCGPA.toString());
+    formData.append('bscGraduationYear', this.application.bscGraduationYear.toString());
+    formData.append('bscAdmissionYear', this.application.bscAdmissionYear.toString());
+    formData.append('mscGraduationYear', this.application.mscGraduationYear.toString());
+    formData.append('mscAdmissionYear', this.application.mscAdmissionYear.toString());
+    formData.append('skills', JSON.stringify(this.application.skills));
+    formData.append('cv', this.uploadedFiles.cv)
+    formData.append('coverLetter', this.uploadedFiles.coverLetter)
+
+    formData.forEach(val => console.log(val))
+
+    this.applicationService.postApplication(formData).subscribe(
+      (response) => {
+        this.messageService.add({ key: 'tc', severity: 'success', summary: 'Congratulations', detail: 'Application is submitted successfully' });
+      },
+      (err) => {
+        console.log(err)
+        this.messageService.add({ key: 'tc', severity: 'error', summary: 'Failed', detail: 'An application with this email already exists.' });
       }
-      else this.messageService.add({ key: 'tc', severity: 'success', summary: 'Congratulation', detail: 'Application is submitted successfully' });
-    })
-
+    );
   }
 
   clear() {
@@ -216,9 +254,8 @@ export class ApplyComponent implements OnInit {
       mscAdmissionYear: new Date().getFullYear(),
       skills: [],
       applicationId: this.jobId
-    }
-    this.messageService.add({ key: 'tc', severity: 'info', summary: 'Fileds Cleared', detail: 'All data fileds are cleared' });
+    };
+    this.uploadedFiles = { cv: null, coverLetter: null };
+    this.messageService.add({ key: 'tc', severity: 'info', summary: 'Fields Cleared', detail: 'All data fields are cleared' });
   }
-
-
 }

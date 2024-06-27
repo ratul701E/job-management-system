@@ -32,6 +32,10 @@ export class SingleApplicationComponent implements OnInit {
     mscCGPA: 0,
     skills: [],
     id: 0,
-    applicationId: 0
+    applicationId: 0,
+    bscGraduationYear: 0,
+    bscAdmissionYear: 0,
+    mscGraduationYear: 0,
+    mscAdmissionYear: 0
   }
 }

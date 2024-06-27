@@ -11,6 +11,7 @@
                     <img alt="Job Image" class="job-logo" src="../../../assets/aiub.png">
                     <h2>{{ job.jobName }}</h2>
                     <h4>Published: {{ job.publishDate }}</h4>
+                    <h4>Deadline: {{ job.deadline }}</h4>
                 </div>
                 <div class="job-content">
                     <p><strong>Job Location:</strong> {{ job.location }}</p>
@@ -163,19 +164,18 @@
             </div>
 
             <div class="form-section upload">
+                <label for="-">Uploads</label>
                 <div class="form-group">
-                    <label for="cv">Upload CV</label>
-                    <p-fileUpload #fubauto mode="basic" name="demo[]" url="" accept=".pdf" [maxFileSize]="10000000"
-                        (onUpload)="onUpload($event)" [auto]="true" chooseLabel="Browse"
-                        [style]="{'margin-top' : '10px'}"></p-fileUpload>
+                    <!-- <label for="cv">Upload CV</label> -->
+                    <p-fileUpload mode="basic" (onSelect)="uploadCv($event)" chooseLabel="CV" name="demo[]"  accept=".pdf"></p-fileUpload>
+
+
                 </div>
                 <div class="form-group">
-                    <label for="cv">Upload Cover Letter</label>
-                    <p-fileUpload #fubauto mode="basic" name="demo[]" url="" accept=".pdf" [maxFileSize]="10000000"
-                        (onUpload)="onUpload($event)" [auto]="true" chooseLabel="Browse"
-                        [style]="{'margin-top' : '10px'}"></p-fileUpload>
+                    <p-fileUpload mode="basic" (onSelect)="uploadCoverLetter($event)" chooseLabel="Cover Letter" name="demo[]" accept=".pdf"></p-fileUpload>
                 </div>
             </div>
+            
 
             <button pButton pRipple type="button" label="Clear Fields" class="p-button-outlined p-button-rounded p-button-warning"
                 style="margin-right: 10px;" (click)="clear()"></button>

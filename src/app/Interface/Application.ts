@@ -15,10 +15,10 @@ export interface Application {
     mscUniversity: string;
     mscDepartment: string;
     mscCGPA: number;
-    bscGraduationYear?: number;
-    bscAdmissionYear?: number;
-    mscGraduationYear?: number;
-    mscAdmissionYear?: number;
+    bscGraduationYear: number;
+    bscAdmissionYear: number;
+    mscGraduationYear: number;
+    mscAdmissionYear: number;
     skills: string[];
     expectedSalary?: number
 }
