@@ -1,13 +1,24 @@
-<p-menubar [model]="items" ></p-menubar>
+<p-menubar [model]="items"></p-menubar>
 <br>
-<!-- conf -->
-<p-confirmDialog #cd [style]="{width: '30vw'}">
-    <ng-template pTemplate="header">
-        <h3>Logout?</h3>
-    </ng-template>
-    <ng-template pTemplate="footer">
-        <button class="p-button-raised p-button-warning" type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
-        <button class="p-button-raised p-button-danger" type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
-    </ng-template>
-</p-confirmDialog>
-<!-- toast -->
+
+<div class="card flex justify-content-center">
+    <p-toast position="center" key="confirm" (onClose)="onReject()" [baseZIndex]="5000">
+        <ng-template let-message pTemplate="message">
+            <div class="flex flex-column" style="flex: 1">
+                <div class="text-center">
+                    <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+                    <h4>{{ message.summary }}</h4>
+                    <p>{{ message.detail }}</p>
+                </div>
+                <div class="grid p-fluid">
+                    <div class="col-6">
+                        <button type="button" pButton (click)="onConfirm()" label="Yes" class="p-button-success"></button>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-toast>
+</div>

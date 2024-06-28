@@ -25,41 +25,22 @@ export class JobService {
 
   }
 
-  getAllJobs(): Observable<Job[]> {
-    return this.http.get<ApiResponseJob<Job[]>>(this.url, httpOptions).pipe(
-      map(response => response.data)
-    );
+  getAllJobs(): Observable<ApiResponseJob<Job[]>> {
+    return this.http.get<ApiResponseJob<Job[]>>(this.url, httpOptions)
   }
 
-  getJobByID(jobId: number): Observable<Job> {
-    return this.http.get<ApiResponseJob<Job>>(`${this.url}/${jobId}`, httpOptions).pipe(
-      map(response => {
-        return response.data
-      })
-    );
+  getJobByID(jobId: number, query: string = ''): Observable<ApiResponseJob<Job>> {
+    return this.http.get<ApiResponseJob<Job>>(`${this.url}/${jobId}?${query}`, httpOptions)
   }
 
-  updateJob(jobId: number, job: Job): Observable<boolean> {
-    return this.http.patch<ApiResponseJob<Job>>(this.url + `/${jobId}`, job, httpOptions).pipe(
-      map(response => {
-        return response.isError
-      })
-    )
+  updateJob(jobId: number, job: Job): Observable<ApiResponseJob<Job>> {
+    return this.http.patch<ApiResponseJob<Job>>(this.url + `/${jobId}`, job, httpOptions)
   }
-  addJob(jobId: number, job: Job): Observable<Job> {
-    return this.http.post<ApiResponseJob<Job>>(this.url, job, httpOptions).pipe(
-      map(response => {
-        return response.data
-      })
-    )
+  addJob(jobId: number, job: Job): Observable<ApiResponseJob<Job>> {
+    return this.http.post<ApiResponseJob<Job>>(this.url, job, httpOptions)
   }
   
-  removeJob(jobId: number): Observable<boolean> {
-    return this.http.delete<ApiResponseJob<boolean>>(this.url + `/${jobId}`, httpOptions).pipe(
-      map(response => {
-        //console.log(response.isError)
-        return response.isError
-      })
-    )
+  removeJob(jobId: number): Observable<ApiResponseJob<boolean>> {
+    return this.http.delete<ApiResponseJob<boolean>>(this.url + `/${jobId}`, httpOptions)
   }
 }

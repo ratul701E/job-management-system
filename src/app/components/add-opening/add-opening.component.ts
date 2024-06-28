@@ -34,7 +34,7 @@ export class AddOpeningComponent {
   }
 
   locations: string[] = []
-
+  minDate = new Date()
   formattedRequirements: string = ''
   formattedResponsibilities: string = ''
 
@@ -69,58 +69,77 @@ export class AddOpeningComponent {
   }
 
   handleAdd() {
-    // Add validation
-    if (!this.job.jobName.trim()) {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Validation Error', detail: 'Job Name is required' });
-      return;
-    }
-
-    if (!this.job.location.trim()) {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Validation Error', detail: 'Location is required' });
-      return;
-    }
-
-    if (!this.job.description.trim()) {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Validation Error', detail: 'Description is required' });
-      return;
-    }
-
-    if (this.job.salary <= 0) {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Validation Error', detail: 'Salary must be greater than zero' });
-      return;
-    }
-
-    if (this.job.maximumApplication <= 0) {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Validation Error', detail: 'Maximum Applications must be greater than zero' });
-      return;
-    }
-
-    if (!this.formattedRequirements.trim()) {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Validation Error', detail: 'Requirements are required' });
-      return;
-    }
-
-    if (!this.formattedResponsibilities.trim()) {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Validation Error', detail: 'Responsibilities are required' });
-      return;
-    }
+    console.log(this.job)
+    if(!this.validate()) return
 
     this.job.requirements = this.formattedRequirements.split('\n').map(req => req.trim()).filter(req => req);
     this.job.responsibilities = this.formattedResponsibilities.split('\n').map(res => res.trim()).filter(res => res);
     this.job.publishDate = this.formatDate(new Date());
+    this.job.deadline = this.formatDate(new Date(this.job.deadline));
 
     console.log(this.job);
-    this.jobService.addJob(this.job.jobId, this.job).subscribe(result => {
-      this.messageService.add({ key: 'tc', severity: 'success', summary: 'Updated', detail: 'Openings Updated Successfully' });
-      this.router.navigate(["/openings"]);
-    });
+    this.jobService.addJob(this.job.jobId, this.job).subscribe(response => {
+      if(!response.isError) {
+        this.messageService.add({ key: 'tc', severity: 'success', summary: 'New Opening Added', detail: "Opening added suessfully"});
+        setTimeout(() => {
+          this.goBack()
+        }, 3000)
+      }
+      else this.showListOfMessages(response.messages, 'Failed to Add', 'error')
+    },
+    error => {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Server Error', detail: "Internal Server Error"});
+    }
+  );
   }
 
-  acceptingResponseChange() {
-    console.log(this.job.acceptingResponse)
+
+  validate() {
+    if (!this.job.jobName.trim()) {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Validation Error', detail: 'Job Name is required' });
+      return false;
+    }
+
+    if (!this.job.location.trim()) {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Validation Error', detail: 'Location is required' });
+      return false;
+    }
+
+    if (!this.job.description.trim()) {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Validation Error', detail: 'Description is required' });
+      return false;
+    }
+
+    if (this.job.salary < 0) {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Validation Error', detail: 'Salary must be greater than zero' });
+      return false;
+    }
+
+    if (this.job.maximumApplication < 0) {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Validation Error', detail: 'Maximum Applications must be greater than zero' });
+      return false;
+    }
+
+    if (!this.formattedRequirements.trim()) {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Validation Error', detail: 'Requirements are required' });
+      return false;
+    }
+
+    if (!this.formattedResponsibilities.trim()) {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Validation Error', detail: 'Responsibilities are required' });
+      return false;
+    }
+
+    return true
   }
 
   goBack() {
     this.router.navigate(["/openings"])
+  }
+
+  showListOfMessages(errors: string[], summary: string, severity = 'error') {
+    errors.forEach(msg => {
+      this.messageService.add({ key: 'tc', severity , summary , detail: msg });
+    })
   }
 }

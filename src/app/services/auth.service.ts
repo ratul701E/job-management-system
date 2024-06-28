@@ -37,9 +37,7 @@ export class AuthService {
     localStorage.removeItem(this.tokenKey);
   }
 
-  signIn(signinDto: SigninDto): Observable<SigninDto> {
-    return this.http.post<ApiResponseSignin>(this.url, signinDto, httpOptions).pipe(
-      map(response => response.data)
-    );
+  signIn(signinDto: SigninDto): Observable<ApiResponseSignin> {
+    return this.http.post<ApiResponseSignin>(this.url, signinDto, httpOptions)
   }
 }

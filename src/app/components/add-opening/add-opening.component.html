@@ -13,20 +13,17 @@
 
     </div>
     <div class="form-group">
-        <label for="publishDate" class="form-label">Publish Date</label>
-        <input type="text" id="publishDate" name="publishDate" [(ngModel)]="job.publishDate" class="form-input"
-            required>
-    </div>
-    <div class="form-group">
         <label for="dealdine" class="form-label">Deadline</label>
-        <input type="text" id="dealdine" name="dealdine" [(ngModel)]="job.deadline" class="form-input"
-            required>
+        <p-calendar [minDate]="minDate" class="date-input" name="deadline" [(ngModel)]="job.deadline"
+            dateFormat="yy-mm-dd" [showIcon]="true"></p-calendar>
     </div>
     <div class="form-group">
         <label for="salary" class="form-label">Salary</label>
-        <input type="number" id="salary" name="salary" [(ngModel)]="job.salary" class="form-input" required> <br>
+        <p-inputNumber name="salary" [(ngModel)]="job.salary" mode="decimal" [showButtons]="true"
+            inputId="minmax-buttons" [step]="5000" [min]="0"> </p-inputNumber>
+
         <label for="negotiable" class="form-label">Negotiable?</label>
-        <p-inputSwitch name="ar"  [(ngModel)]="this.job.isNegotiable"/>
+        <p-inputSwitch name="ar" [(ngModel)]="this.job.isNegotiable" />
     </div>
     <div class="form-group">
         <label for="description" class="form-label">Description</label>
@@ -46,12 +43,11 @@
     </div>
     <div class="form-group">
         <label for="maximumApplication" class="form-label">Max Applications</label>
-        <input type="number" id="maximumApplication" name="maximumApplication" [(ngModel)]="job.maximumApplication"
-            class="form-input" required>
+        <p-inputNumber [(ngModel)]="job.maximumApplication" [step]="10" [showButtons]="true" inputId="minmax-buttons" [min]="1"> </p-inputNumber>
     </div>
     <div class="form-group">
         <label for="acceptingResponse" class="form-label">Accepting Response</label>
-        <td><p-inputSwitch name="ar" (onChange)="acceptingResponseChange()" [(ngModel)]="this.job.acceptingResponse"></p-inputSwitch>
+        <td><p-inputSwitch name="ar" [(ngModel)]="this.job.acceptingResponse"></p-inputSwitch>
     </div>
 
     <button pButton pRipple type="button" label="Add" class="p-button-rounded p-button-rounded p-button-info"
@@ -64,8 +60,10 @@
         <h3>Are You Sure?</h3>
     </ng-template>
     <ng-template pTemplate="footer">
-        <button class="p-button-raised p-button-danger" type="button" pButton icon="pi pi-times" label="No" (click)="cd.reject()"></button>
-        <button class="p-button-raised p-button-success" type="button" pButton icon="pi pi-check" label="Yes" (click)="cd.accept()"></button>
+        <button class="p-button-raised p-button-danger" type="button" pButton icon="pi pi-times" label="No"
+            (click)="cd.reject()"></button>
+        <button class="p-button-raised p-button-success" type="button" pButton icon="pi pi-check" label="Yes"
+            (click)="cd.accept()"></button>
     </ng-template>
 </p-confirmDialog>
 <!-- toast -->

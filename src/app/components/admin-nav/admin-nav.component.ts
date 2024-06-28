@@ -2,8 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/services/auth.service';
-import {ConfirmationService} from 'primeng/api';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-admin-nav',
@@ -14,17 +13,21 @@ import { MessageService } from 'primeng/api';
 export class AdminNavComponent {
   @Output() back = new EventEmitter();
 
-  constructor(private router: Router, private authService: AuthService, private confirmationService: ConfirmationService) { }
-
   items: MenuItem[] = [];
 
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit(): void {
     this.items = [
       {
         label: 'Logout',
         icon: 'pi pi-sign-out',
-        command: () => this.handleLogout()
+        command: () => this.showConfirm()
       },
       {
         label: 'Back',
@@ -40,27 +43,36 @@ export class AdminNavComponent {
         label: 'Add Opening',
         icon: 'pi pi-plus',
         command: () => this.router.navigate(['/add-opening'])
-      },
+      }
     ];
   }
 
   onBack() {
-    this.back.emit()
+    this.back.emit();
   }
 
   onViewOpenings() {
-    console.log("called")
-    this.router.navigate(["/openings"])
+    this.router.navigate(['/openings']);
   }
 
-  handleLogout() {
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to logout?',
-      accept: () => {
-        this.authService.removeToken()
-        this.router.navigate(['/login'])
-      }
-  });
+  showConfirm() {
+    this.messageService.clear('confirm');
+    this.messageService.add({ 
+      key: 'confirm', 
+      severity: 'info', 
+      summary: 'Logout Confirmation', 
+      detail: 'Are you sure you want to logout?', 
+      sticky: true 
+    });
   }
 
+  onReject() {
+    this.messageService.clear('confirm');
+  }
+
+  onConfirm() {
+    this.authService.removeToken();
+    this.router.navigate(['/login']);
+    this.messageService.clear('confirm');
+  }
 }

@@ -21,4 +21,6 @@ export interface Application {
     mscAdmissionYear: number;
     skills: string[];
     expectedSalary?: number
+    cv?: string
+    coverLetter?: string
 }

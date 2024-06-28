@@ -1,11 +1,13 @@
 <app-admin-nav></app-admin-nav>
 
 <div class="options">
-    <button pButton pRipple type="button" routerLink="/add-opening" label="Add New Openings" icon="pi pi-plus"
-        class="p-button-raised p-button-success "></button>
+
 </div>
 
 <div class="card">
+    <button pButton pRipple type="button" routerLink="/add-opening" label="New" icon="pi pi-plus"
+        class="p-button-raised p-button-success "></button>
+
     <h3 class="title">All Openings (Total {{jobs.length}}) </h3>
     <p-table #dt [value]="jobs" dataKey="jobId" [rows]="25" [showCurrentPageReport]="true"
         [rowsPerPageOptions]="[5, 10, 25, 50]" [loading]="loading" [paginator]="true"
@@ -82,7 +84,7 @@
             </div>
             <div class="job-detail">
                 <span class="detail-label">Applicant:</span>
-                <span class="detail-value">{{ job.jobApplications.length }}</span>
+                <span class="detail-value">{{ job.alreadyApplied }}</span>
             </div>
         </div>
     </div>
@@ -112,7 +114,9 @@
         <h3>Are You Sure?</h3>
     </ng-template>
     <ng-template pTemplate="footer">
-        <button class="p-button-raised p-button-warning" type="button" pButton icon="pi pi-times" label="Cancel" (click)="cd.reject()"></button>
-        <button class="p-button-raised p-button-danger" type="button" pButton icon="pi pi-trash" label="Delete" (click)="cd.accept()"></button>
+        <button class="p-button-raised p-button-warning" type="button" pButton icon="pi pi-times" label="Cancel"
+            (click)="cd.reject()"></button>
+        <button class="p-button-raised p-button-danger" type="button" pButton icon="pi pi-trash" label="Delete"
+            (click)="cd.accept()"></button>
     </ng-template>
 </p-confirmDialog>

@@ -79,9 +79,9 @@
     <div class="application-details">
         <h1>Application ID: {{selectedApplication.id}}</h1>
         <div class="detail-group">
-            <button icon="pi pi-book" pButton pRipple type="button" label="View CV"
+            <button icon="pi pi-book" pButton pRipple (click)="showPdf(this.selectedApplication.cv)" type="button" label="View CV"
                 class="p-button-info"></button>
-            <button icon="pi pi-file" pButton pRipple type="button" label="View Cover Letter"
+            <button icon="pi pi-file" pButton pRipple (click)="showPdf(this.selectedApplication.coverLetter)" type="button" label="View Cover Letter"
                 class="p-button-help"></button>
         </div>
         <h2>Personal Infomation:</h2>
@@ -158,9 +158,9 @@
             </span>
         </div>        
         <div class="detail-group">
-            <button icon="pi pi-book" pButton pRipple type="button" label="View CV"
+            <button icon="pi pi-book" pButton pRipple (click)="showPdf(this.selectedApplication.cv)" type="button" label="View CV"
                 class="p-button-info"></button>
-            <button icon="pi pi-file" pButton pRipple type="button" label="View Cover Letter"
+            <button icon="pi pi-file" pButton pRipple (click)="showPdf(this.selectedApplication.coverLetter)" type="button" label="View Cover Letter"
                 class="p-button-help"></button>
         </div>
     </div>
@@ -171,3 +171,4 @@
             class="p-button-outlined p-button-rounded p-button-info"></button>
     </ng-template>
 </p-dialog>
+<p-toast position="top-center" key="tc"></p-toast>

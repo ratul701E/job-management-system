@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable, catchError, map } from 'rxjs';
 import { Application } from '../Interface/Application';
 import { environment } from 'src/environments/environment';
+import { ServiceResult } from '../Interface/ServiceResult';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -25,25 +26,15 @@ export class ApplicationService {
 
   }
 
-  postApplication(application: FormData) : Observable<boolean> {
-    return this.http.post<ApiResponseApplication<boolean>>(this.url, application).pipe(
-      map(response => {
-        return response.isError
-      })
-    )
+  postApplication(application: Application) : Observable<ApiResponseApplication<boolean>> {
+    return this.http.post<ApiResponseApplication<boolean>>(this.url, application)
   }
 
-  getAllApplications(): Observable<Application[]> {
-    return this.http.get<ApiResponseApplication<Application[]>>(this.url, httpOptions).pipe(
-      map(response => response.data)
-    );
+  getAllApplications(): Observable<ApiResponseApplication<Application[]>> {
+    return this.http.get<ApiResponseApplication<Application[]>>(this.url, httpOptions)
   }
 
-  getAllApplicationByID(appId: number): Observable<Application> {
-    return this.http.get<ApiResponseApplication<Application>>(`${this.url}/${appId}`, httpOptions).pipe(
-      map(response => {
-        return response.data
-      })
-    );
+  getAllApplicationByID(appId: number): Observable<ApiResponseApplication<Application>> {
+    return this.http.get<ApiResponseApplication<Application>>(`${this.url}/${appId}`, httpOptions)
   }
 }

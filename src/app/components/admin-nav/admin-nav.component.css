@@ -1,0 +1,66 @@
+
+/* Flexbox for the toast message layout */
+.flex {
+    display: flex;
+}
+
+/* Center content in the text-center class */
+.text-center {
+    text-align: center;
+}
+
+/* Style for the icons */
+.pi-exclamation-triangle {
+    color: #f39c12;
+}
+
+/* Responsive grid for buttons */
+.grid {
+    display: grid;
+    gap: 1rem;
+    width: 100%;
+}
+
+/* Grid layout for buttons */
+.grid.p-fluid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/* Style for the buttons */
+button[pButton] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+/* Hover effects for buttons */
+button[pButton].p-button-success:hover {
+    background-color: #3f9f57;
+}
+
+button[pButton].p-button-secondary:hover {
+    background-color: #95a5a6;
+}
+
+/* Style the h4 header */
+h4 {
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1.5rem;
+    color: #333333;
+}
+
+/* Style the paragraph */
+p {
+    margin-bottom: 2px;
+    color: #666666;
+}
+
+/* Utility classes */
+.flex-column {
+    flex-direction: column;
+}
+
+.justify-content-center {
+    justify-content: center;
+}

@@ -12,12 +12,15 @@ import { MenubarModule } from 'primeng/menubar';
 import { ToastModule } from 'primeng/toast';
 import { ChipModule } from 'primeng/chip';
 import { TableModule } from 'primeng/table';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {InputSwitchModule} from 'primeng/inputswitch';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { InputSwitchModule } from 'primeng/inputswitch';
 import { CheckboxModule } from 'primeng/checkbox';
-import {StyleClassModule} from 'primeng/styleclass';
-import {DropdownModule} from 'primeng/dropdown';
+import { StyleClassModule } from 'primeng/styleclass';
+import { DropdownModule } from 'primeng/dropdown';
 import { TagModule } from 'primeng/tag';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -80,6 +83,8 @@ import { AuthService } from './services/auth.service';
     RippleModule,
     DropdownModule,
     TagModule,
+    InputNumberModule,
+    AutoCompleteModule
   ],
   providers: [
     AuthService,

@@ -44,12 +44,15 @@ export class UpdateOpeningComponent implements OnInit {
 
   ngOnInit(): void {
     this.AcRouter.queryParams.subscribe((params: any) => this.jobId = params.jobId)
-    this.jobService.getJobByID(this.jobId).subscribe(job => {
-      this.job = job
+    this.jobService.getJobByID(this.jobId).subscribe(response => {
+      this.job = response.data
       this.formattedRequirements = this.job.requirements.join('\n');
       this.formattedResponsibilities = this.job.responsibilities.join('\n');
 
       console.log(this.job)
+    },
+    error => {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Server Error', detail: "Internal Server Error"});
     })
   }
 
@@ -65,12 +68,17 @@ export class UpdateOpeningComponent implements OnInit {
   handleUpate() {
     this.job.requirements = this.formattedRequirements.split('\n')
     this.job.responsibilities = this.formattedResponsibilities.split('\n')
+    this.job.deadline = this.formatDate(new Date(this.job.deadline))
     console.log(this.job)
-    this.jobService.updateJob(this.job.jobId, this.job).subscribe(result => {
-      if(result) {
-        this.messageService.add({ key: 'tc', severity: 'error', summary: 'Failed', detail: 'Cannot set lower value than applicant count' });
+    this.jobService.updateJob(this.job.jobId, this.job).subscribe(response => {
+      if(!response.isError) {
+        this.messageService.add({ key: 'tc', severity: 'success', summary: 'Updated', detail: 'Openings Updated Successfully' });
       }
-      else this.messageService.add({ key: 'tc', severity: 'success', summary: 'Updated', detail: 'Openings Updated Successfully' });
+      else this.showListOfMessages(response.messages, 'Failed to Update', 'error') 
+    },
+    error => {
+      console.log(error)
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Server Error', detail: "Internal Server Error"});
     })
     
 
@@ -78,6 +86,20 @@ export class UpdateOpeningComponent implements OnInit {
 
   goBack() {
     this.router.navigate(["/openings"])
+  }
+
+  showListOfMessages(errors: string[], summary: string, severity = 'error') {
+    errors.forEach(msg => {
+      this.messageService.add({ key: 'tc', severity , summary , detail: msg });
+    })
+  }
+
+
+  formatDate(date: Date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
 }

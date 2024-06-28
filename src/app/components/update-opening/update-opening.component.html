@@ -18,14 +18,9 @@
         <p-inputSwitch name="negotiable"  [(ngModel)]="this.job.isNegotiable"/>
     </div>
     <div class="form-group">
-        <label for="publishDate" class="form-label">Publish Date</label>
-        <input type="text" id="publishDate" name="publishDate" [(ngModel)]="job.publishDate" class="form-input"
-            required>
-    </div>
-    <div class="form-group">
         <label for="dealdine" class="form-label">Deadline</label>
-        <input type="text" id="dealdine" name="dealdine" [(ngModel)]="job.deadline" class="form-input"
-            required>
+        <p-calendar class="date-input" name="deadline" [(ngModel)]="job.deadline" dateFormat="yy-mm-dd"
+        [showIcon]="true"></p-calendar>
     </div>
     <div class="form-group">
         <label for="description" class="form-label">Description</label>

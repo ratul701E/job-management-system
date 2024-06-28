@@ -2,11 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { JobService } from 'src/app/services/job.service';
 import { Job } from './interface/Job';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
+
 
 @Component({
   selector: 'app-job-item',
   templateUrl: './job-item.component.html',
-  styleUrls: ['./job-item.component.css']
+  styleUrls: ['./job-item.component.css'],
+  providers: [MessageService, ConfirmationService]
 })
 export class JobItemComponent implements OnInit {
 
@@ -30,15 +33,18 @@ export class JobItemComponent implements OnInit {
     deadline: ''
   };
 
-  constructor(private jobService: JobService, private AcRouter: ActivatedRoute, private router: Router) { }
+  constructor(private messageService: MessageService, private jobService: JobService, private AcRouter: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
 
     this.AcRouter.queryParams.subscribe((params: any) => this.jobId = params.jobId)
 
 
-    this.jobService.getJobByID(this.jobId).subscribe(job => {
-      this.job = job
+    this.jobService.getJobByID(this.jobId).subscribe(response => {
+      this.job = response.data
+    },
+    error => {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Server Error', detail: "Internal Server Error"});
     })
 
   }

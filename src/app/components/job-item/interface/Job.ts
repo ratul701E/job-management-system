@@ -12,7 +12,7 @@ export interface Job {
     responsibilities: string[]
     maximumApplication: number
     acceptingResponse: boolean
-    jobApplications: Application[]
+    jobApplications?: Application[]
     alreadyApplied: number
     isNegotiable: boolean
 

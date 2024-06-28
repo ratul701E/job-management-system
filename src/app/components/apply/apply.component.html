@@ -33,6 +33,7 @@
         <div class="form-container">
             <div class="title">Application Form</div>
             <div class="form-group">
+                <h3>Personal Information</h3>
                 <label for="name">Name</label>
                 <input type="text" class="p-inputtext-sm" pInputText id="name" [(ngModel)]="application.name"
                     name="name" required />
@@ -57,9 +58,9 @@
             </div>
 
             <div class="form-group" *ngIf="job.isNegotiable">
-                <label for="expected-salary">Expected Salary</label>
-                <input type="number" class="p-inputtext-sm" pInputText id="expected-salary" [(ngModel)]="application.expectedSalary"
-                    name="email" required />
+                <label for="expected-salary">Expected Salary</label>&nbsp;&nbsp;&nbsp;
+                    <p-inputNumber [(ngModel)]="application.expectedSalary" mode="decimal" [showButtons]="true"
+                    inputId="minmax-buttons" [step]="5000" [min]="0"> </p-inputNumber>
             </div>
 
             <div class="form-group">
@@ -87,9 +88,10 @@
                         id="bsc-department" name="bscDepartment" />
                 </div>
                 <div class="form-group">
-                    <label for="bsc-cgpa">CGPA</label>
-                    <input type="number" class="p-inputtext-sm" [(ngModel)]="application.bscCGPA" pInputText
-                        id="bsc-cgpa" step="0.01" min="0" max="4" name="bscCGPA" />
+                    <label for="bsc-cgpa">CGPA</label>&nbsp;&nbsp;&nbsp;
+                    <p-inputNumber [(ngModel)]="application.bscCGPA" mode="decimal" [showButtons]="true"
+                        inputId="minmax-buttons" [step]="0.25" [min]="0" [max]="4"> </p-inputNumber>
+
                 </div>
                 <div class="form-group">
                     <label for="isBscCompleted">Is BSc Completed?</label>
@@ -97,13 +99,15 @@
                         name="isBscCompleted" />
                     <div *ngIf="application.isBscCompleted">
                         <br>
-                        <label for="bscGraduationYear">Graduation Year</label>
-                        <input type="number" name="bscGraduationYear" [(ngModel)]="application.bscGraduationYear">
+                        <label for="bscGraduationYear">Graduation Year</label>&nbsp;&nbsp;&nbsp;
+                        <p-calendar [(ngModel)]="application.bscGraduationYear" view="year" dateFormat="yy"
+                            name="bscGraduationYear" inputId="bscGraduationYear"></p-calendar>
                     </div>
                     <div *ngIf="!application.isBscCompleted">
                         <br>
-                        <label for="bscAdmissionYear">Admission Year</label>
-                        <input type="number" name="bscAdmissionYear" [(ngModel)]="application.bscAdmissionYear">
+                        <label for="bscAdmissionYear">Admission Year</label>&nbsp;&nbsp;&nbsp;
+                        <p-calendar [(ngModel)]="application.bscAdmissionYear" view="year" dateFormat="yy"
+                            name="bscAdmissionYear" inputId="bscAdmissionYear"></p-calendar>
                     </div>
                 </div>
             </div>
@@ -124,9 +128,9 @@
                             id="msc-department" name="mscDepartment" />
                     </div>
                     <div class="form-group">
-                        <label for="msc-cgpa">CGPA</label>
-                        <input type="number" class="p-inputtext-sm" [(ngModel)]="application.mscCGPA" pInputText
-                            id="msc-cgpa" step="0.01" min="0" max="4" name="mscCGPA" />
+                        <label for="msc-cgpa">CGPA</label>&nbsp;&nbsp;&nbsp;
+                            <p-inputNumber [(ngModel)]="application.mscCGPA" mode="decimal" [showButtons]="true"
+                            inputId="minmax-buttons" [step]="0.25" [min]="0" [max]="4"> </p-inputNumber>
                     </div>
                     <div class="form-group">
                         <label for="isMscCompleted">Is MSc Completed?</label>
@@ -134,13 +138,15 @@
                             name="isMscCompleted" />
                         <div *ngIf="application.isMscCompleted">
                             <br>
-                            <label for="mscGraduationYear">Graduation Year</label>
-                            <input type="number" name="mscGraduationYear" [(ngModel)]="application.mscGraduationYear">
+                            <label for="mscGraduationYear">Graduation Year</label>&nbsp;&nbsp;&nbsp;
+                            <p-calendar [(ngModel)]="application.mscGraduationYear" view="year" dateFormat="yy"
+                                name="mscGraduationYear" inputId="mscGraduationYear"></p-calendar>
                         </div>
                         <div *ngIf="!application.isMscCompleted">
                             <br>
-                            <label for="mscAdmissionYear">Admission Year</label>
-                            <input type="number" name="mscAdmissionYear" [(ngModel)]="application.mscAdmissionYear">
+                            <label for="mscAdmissionYear">Admission Year</label>&nbsp;&nbsp;&nbsp;
+                            <p-calendar [(ngModel)]="application.mscAdmissionYear" view="year" dateFormat="yy"
+                                name="mscAdmissionYear" inputId="mscAdmissionYear"></p-calendar>
                         </div>
                     </div>
                 </div>
@@ -167,21 +173,24 @@
                 <label for="-">Uploads</label>
                 <div class="form-group">
                     <!-- <label for="cv">Upload CV</label> -->
-                    <p-fileUpload mode="basic" (onSelect)="uploadCv($event)" chooseLabel="CV" name="demo[]"  accept=".pdf"></p-fileUpload>
+                    <p-fileUpload mode="basic" (onSelect)="uploadCv($event)" chooseLabel="CV" name="demo[]"
+                        accept=".pdf"></p-fileUpload>
 
 
                 </div>
                 <div class="form-group">
-                    <p-fileUpload mode="basic" (onSelect)="uploadCoverLetter($event)" chooseLabel="Cover Letter" name="demo[]" accept=".pdf"></p-fileUpload>
+                    <p-fileUpload mode="basic" (onSelect)="uploadCoverLetter($event)" chooseLabel="Cover Letter"
+                        name="demo[]" accept=".pdf"></p-fileUpload>
                 </div>
             </div>
-            
 
-            <button pButton pRipple type="button" label="Clear Fields" class="p-button-outlined p-button-rounded p-button-warning"
-                style="margin-right: 10px;" (click)="clear()"></button>
-                <br>
-            <button pButton pRipple type="button" label="Submit" class="p-button-outlined p-button-rounded p-button-info"
-                (click)="handleApply()"></button>
+
+            <button pButton pRipple type="button" label="Clear Fields"
+                class="p-button-outlined p-button-rounded p-button-warning" style="margin-right: 10px;"
+                (click)="clear()"></button>
+            <br>
+            <button pButton pRipple type="button" label="Submit"
+                class="p-button-outlined p-button-rounded p-button-info" (click)="handleApply()"></button>
 
         </div>
     </div>

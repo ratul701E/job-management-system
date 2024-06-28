@@ -25,10 +25,13 @@ export class ViewOpeningComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.jobService.getAllJobs().subscribe(jobs => {
-      this.jobs = jobs
+    this.jobService.getAllJobs().subscribe(response => {
+      this.jobs = response.data
       //this.job = this.jobs[0]
       this.loading = false
+    },
+    error => {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Server Error', detail: "Internal Server Error"});
     })
     
   }
@@ -65,8 +68,8 @@ export class ViewOpeningComponent implements OnInit {
       this.messageService.add({ key: 'tc', severity: 'warn', summary: 'Failed To Remove', detail: 'Unknown error occured' });
     }
 
-    if(this.job.jobApplications.length > 0) {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Failed To Remove', detail: `The job have ${this.job.jobApplications.length} application(s)` });
+    if(this.job.alreadyApplied > 0) {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Failed To Remove', detail: `The job have ${this.job.alreadyApplied} application(s)` });
       return
     }
 
@@ -80,14 +83,16 @@ export class ViewOpeningComponent implements OnInit {
   }
 
   private handleDelete() {
-    this.jobService.removeJob(this.job.jobId).subscribe(isErr => {
-      if(!isErr) {
+    this.jobService.removeJob(this.job.jobId).subscribe(response => {
+      if(!response.isError) {
         this.jobs = this.jobs.filter((value) => this.job.jobId != value.jobId)
         this.messageService.add({ key: 'tc', severity: 'success', summary: 'Openings Removed', detail: `The job is removed successfully` });
       }
-      else this.messageService.add({ key: 'tc', severity: 'error', summary: 'Failed To Remove', detail: `The job have ${this.job.jobApplications.length} application(s)` });
-    
+      else this.messageService.add({ key: 'tc', severity: 'error', summary: 'Failed To Remove', detail: `The job have ${this.job.jobApplications?.length} application(s)` });
       this.showDialog(false)
+    },
+    error => {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Server Error', detail: "Internal Server Error"});
     })
   }
 

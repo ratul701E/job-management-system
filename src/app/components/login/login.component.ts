@@ -32,13 +32,11 @@ export class LoginComponent {
       tokenExist: false
     }
     console.log(signinDto)
-    this.authService.signIn(signinDto).subscribe(dto => {
-      console.log(dto)
-      if(dto.tokenExist) {
+    this.authService.signIn(signinDto).subscribe(response => {
+      if(response.data.tokenExist) {
         //success
         this.router.navigate(['/openings'])
-        this.authService.setToken(dto.token)
-        console.log(dto)
+        this.authService.setToken(response.data.token)
       }
       else {
         //failed
@@ -46,6 +44,9 @@ export class LoginComponent {
         this.messageService.add({ key: 'tc', severity: 'warn', summary: 'Invalid Credentials', detail: 'Please provide all correct credentials.' });
 
       }
+    },
+    error => {
+      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Server Error', detail: "Internal Server Error"});
     })
   }
 }
