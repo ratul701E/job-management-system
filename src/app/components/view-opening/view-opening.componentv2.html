@@ -12,7 +12,7 @@
     <p-table #dt [value]="jobs" dataKey="jobId" [rows]="25" [showCurrentPageReport]="true"
         [rowsPerPageOptions]="[5, 10, 25, 50]" [loading]="loading" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [globalFilterFields]="['jobName', 'location', 'salary', 'publishDate', 'maximumApplication', 'acceptingResponse']"
+        [globalFilterFields]="['jobName', 'location', 'salary', 'publishDate', 'deadline', 'maximumApplication', 'acceptingResponse']"
         [tableStyle]="{ 'min-width': '75rem' }" responsiveLayout="scroll" selectionMode="single"
         (onRowSelect)="onSelect()" (onRowUnselect)="onUnselect()" [(selection)]="job" class="custom-table">
 
