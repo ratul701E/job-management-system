@@ -4,7 +4,6 @@ import { Job } from '../job-item/interface/Job';
 import { NavigationExtras, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
-
 @Component({
   selector: 'app-job',
   templateUrl: './job.component.html',
@@ -19,25 +18,22 @@ export class JobComponent implements OnInit {
   ngOnInit(): void {
     this.jobService.getAllJobs().subscribe(response => {
       this.jobs = response.data.filter(job => {
-        if(!job.acceptingResponse || job.alreadyApplied === job.maximumApplication) return false
+        if (!job.acceptingResponse || job.alreadyApplied === job.maximumApplication) return false
         return job
       })
     },
-    error => {
-      this.messageService.add({ key: 'tc', severity: 'error', summary: 'Server Error', detail: "Internal Server Error"});
-    })
-
+      error => {
+        this.messageService.add({ key: 'tc', severity: 'error', summary: 'Server Error', detail: "Internal Server Error" });
+      })
   }
-
-  
 
   goToJob(jobId: number) {
     console.log(jobId)
-    this.router.navigate([`/job`], {queryParams: {'jobId' : jobId}});
+    this.router.navigate([`/job`], { queryParams: { 'jobId': jobId } });
   }
 
-  apply(jobId: number){
-    this.router.navigate(["/apply"], {queryParams: {'jobId' : jobId}})
+  apply(jobId: number) {
+    this.router.navigate(["/apply"], { queryParams: { 'jobId': jobId } })
   }
 
   goBack() {

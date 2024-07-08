@@ -42,6 +42,7 @@ import { PasswordModule } from 'primeng/password';
 import { RippleModule } from 'primeng/ripple';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthService } from './services/auth.service';
+import { ConnectComponent } from './components/animation/connect/connect.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { AuthService } from './services/auth.service';
     UpdateOpeningComponent,
     AdminNavComponent,
     SingleApplicationComponent,
-    LoginComponent
+    LoginComponent,
+    ConnectComponent
   ],
   imports: [
     BrowserModule,
